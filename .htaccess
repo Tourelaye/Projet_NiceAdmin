@@ -1,0 +1,16 @@
+RewriteEngine On
+
+# ---------------- Routes globales    ---------------- 
+RewriteRule ^login$ login.php
+RewriteRule ^index$ index.php
+
+
+# ---------------- Routes View        ----------------
+
+
+
+# ---------------- Routes controllers ----------------
+
+
+
+# ---------------- Routes Models      ---------------- 
