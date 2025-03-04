@@ -1,10 +1,9 @@
 RewriteEngine On
 
 # ---------------- Routes globales    ---------------- 
-RewriteRule ^connexion$ login.php
-RewriteRule ^index$ index.php
+RewriteRule ^login$ login.php
 RewriteRule ^admin$ admin.php 
-
+RewriteRule ^home$ index.php 
 
 # ---------------- Routes View        ----------------
 

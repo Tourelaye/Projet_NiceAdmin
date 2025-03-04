@@ -1,58 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+<!-- ================================== Section Head ================================== -->
+<?php require_once("view/sections/vitrine/head.php")?>
 
-  <title>Dashboard - NiceAdmin Bootstrap Template</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
+<body class="index-page">
 
-  <!-- Favicons -->
-  <link href="public/templates/NiceAdmin/assets/img/favicon.png" rel="icon">
-  <link href="public/templates/NiceAdmin/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <!-- ================================== Section Menu ================================== -->
+  <?php require_once("view/sections/vitrine/menu.php")?>
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.gstatic.com" rel="preconnect">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <main class="main">
 
-  <!-- Vendor CSS Files -->
-  <link href="public/templates/NiceAdmin/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="public/templates/NiceAdmin/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="public/templates/NiceAdmin/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="public/templates/NiceAdmin/assets/vendor/quill/quill.snow.css" rel="stylesheet">
-  <link href="public/templates/NiceAdmin/assets/vendor/quill/quill.bubble.css" rel="stylesheet">
-  <link href="public/templates/NiceAdmin/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="public/templates/NiceAdmin/assets/vendor/simple-datatables/style.css" rel="stylesheet">
+    <!-- ================================== Section Home ================================== -->
+    <?php require_once("view/sections/vitrine/home.php")?>  
 
-  <!-- Template Main CSS File -->
-  <link href="public/templates/NiceAdmin/assets/css/style.css" rel="stylesheet">
+    <!-- ================================== Section About ================================== -->
+    <?php require_once("view/sections/vitrine/about.php")?>
 
-  <!-- =======================================================
-  * Template Name: NiceAdmin
-  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-  * Updated: Apr 20 2024 with Bootstrap v5.3.3
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
-</head>
+    <!-- ================================== Section Features ================================== -->
+    <?php require_once("view/sections/vitrine/features.php")?>
 
-<body>
+    <!-- ================================== Section Service ================================== -->
+    <?php require_once("view/sections/vitrine/service.php")?>
 
-  <!-- ==================== Header ==================== -->
-  <?php require_once("view/sections/admin/header.php")?>
+    <!-- ================================== Section Pricing ================================== -->
+    <?php require_once("view/sections/vitrine/pricing.php")?>
 
-  <!-- ==================== SideBar ==================== -->
-  <?php require_once("view/sections/admin/sideBar.php")?>
-  <!-- ==================== Main/Contenu ==================== -->
-  <?php require_once("view/sections/admin/main.php")?>
+    <!-- ================================== Section Contact ================================== -->
+    <?php require_once("view/sections/vitrine/contact.php")?>
 
-  <!-- ==================== Footer ==================== -->
-  <?php require_once("view/sections/admin/footer.php")?>
+  </main>
 
-  <!-- ==================== Fichiers Java ==================== -->
-  <?php require_once("view/sections/admin/script.php")?>
+  <!-- ================================== Section Footer ================================== -->
+  <?php require_once("view/sections/vitrine/footer.php")?>
+
+  <!-- ================================== Section JS Files ================================== -->
+  <?php require_once("view/sections/vitrine/script.php")?>
 
 </body>
 

@@ -1,14 +1,11 @@
-<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
-<!-- ==================== Fichiers Java ==================== -->
-<script src="public/templates/NiceAdmin/assets/vendor/apexcharts/apexcharts.min.js"></script>
-<script src="public/templates/NiceAdmin/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="public/templates/NiceAdmin/assets/vendor/chart.js/chart.umd.js"></script>
-<script src="public/templates/NiceAdmin/assets/vendor/echarts/echarts.min.js"></script>
-<script src="public/templates/NiceAdmin/assets/vendor/quill/quill.js"></script>
-<script src="public/templates/NiceAdmin/assets/vendor/simple-datatables/simple-datatables.js"></script>
-<script src="public/templates/NiceAdmin/assets/vendor/tinymce/tinymce.min.js"></script>
-<script src="public/templates/NiceAdmin/assets/vendor/php-email-form/validate.js"></script>
+<script src="public/templates/templateAdmin/assets/vendor/apexcharts/apexcharts.min.js"></script>
+<script src="public/templates/templateAdmin/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="public/templates/templateAdmin/assets/vendor/chart.js/chart.umd.js"></script>
+<script src="public/templates/templateAdmin/assets/vendor/echarts/echarts.min.js"></script>
+<script src="public/templates/templateAdmin/assets/vendor/quill/quill.js"></script>
+<script src="public/templates/templateAdmin/assets/vendor/simple-datatables/simple-datatables.js"></script>
+<script src="public/templates/templateAdmin/assets/vendor/tinymce/tinymce.min.js"></script>
+<script src="public/templates/templateAdmin/assets/vendor/php-email-form/validate.js"></script>
 
 <!-- Template Main JS File -->
-<script src="public/templates/NiceAdmin/assets/js/main.js"></script>
+<script src="public/templates/templateAdmin/assets/js/main.js"></script>
