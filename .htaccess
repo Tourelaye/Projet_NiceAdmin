@@ -6,11 +6,23 @@ RewriteRule ^admin$ admin.php
 RewriteRule ^home$ index.php 
 
 # ---------------- Routes View        ----------------
-
-
+RewriteRule ^pages-ajouter.html$ view/pages/admin/ajouter/liste.php 
+RewriteRule ^pages-modifier.html$ view/pages/admin/modifier/liste.php 
+RewriteRule ^pages-supprimer.html$ view/pages/admin/supprimer/liste.php 
+RewriteRule ^pages-rechercher.html$ view/pages/admin/rechercher/liste.php 
+RewriteRule ^pages-liste.html$ view/pages/admin/liste/liste.php 
+RewriteRule ^pages-deconnexion.html$ view/pages/admin/deconnexion/liste.php
 
 # ---------------- Routes controllers ----------------
-
-
+RewriteRule ^AjouterEtudiant$ controller/ajouter/AjouterMainEtudiant.php
+RewriteRule ^ListeEtudiant$ controller/liste/ListeMainEtudiant.php
+RewriteRule ^ModifierEtudiant$ controller/modifier/ModifierMainEtudiant.php
+RewriteRule ^SupprimerEtudiant$ controller/supprimer/SupprimerMainEtudiant.php
+RewriteRule ^RechercherEtudiant$ controller/rechercher/RechercherMainEtudiant.php
 
 # ---------------- Routes Models      ---------------- 
+RewriteRule ^AjouterRepository$ model/AjouterRepository.php
+RewriteRule ^ListeRepository$ model/ListeRepository.php
+RewriteRule ^ModifierRepository$ model/ModifierRepository.php
+RewriteRule ^SupprimerRepository$ model/SupprimerRepository.php
+RewriteRule ^RechercherRepository$ model/RechercherRepository.php
