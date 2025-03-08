@@ -6,23 +6,18 @@ RewriteRule ^admin$ admin.php
 RewriteRule ^home$ index.php 
 
 # ---------------- Routes View        ----------------
-RewriteRule ^pages-ajouter.html$ view/pages/admin/ajouter/liste.php 
-RewriteRule ^pages-modifier.html$ view/pages/admin/modifier/liste.php 
-RewriteRule ^pages-supprimer.html$ view/pages/admin/supprimer/liste.php 
-RewriteRule ^pages-rechercher.html$ view/pages/admin/rechercher/liste.php 
-RewriteRule ^pages-liste.html$ view/pages/admin/liste/liste.php 
+RewriteRule ^pages-etudiant.html$ view/pages/admin/etudiant/liste.php 
+RewriteRule ^pages-note.html$ view/pages/admin/note/liste.php 
+RewriteRule ^pages-evaluation.html$ view/pages/admin/evaluation/liste.php 
 RewriteRule ^pages-deconnexion.html$ view/pages/admin/deconnexion/liste.php
 
 # ---------------- Routes controllers ----------------
-RewriteRule ^AjouterEtudiant$ controller/ajouter/AjouterMainEtudiant.php
-RewriteRule ^ListeEtudiant$ controller/liste/ListeMainEtudiant.php
-RewriteRule ^ModifierEtudiant$ controller/modifier/ModifierMainEtudiant.php
-RewriteRule ^SupprimerEtudiant$ controller/supprimer/SupprimerMainEtudiant.php
-RewriteRule ^RechercherEtudiant$ controller/rechercher/RechercherMainEtudiant.php
+RewriteRule ^EtudiantEtudiant$ controller/etudiant/EtudiantMainEtudiant.php
+RewriteRule ^NoteEtudiant$ controller/note/NoteMainEtudiant.php
+RewriteRule ^EvaluationEtudiant$ controller/modifier/EvaluationMainEtudiant.php
+RewriteRule ^DeconnexionEtudiant$ controller/deconnexion/DeconnexionMainEtudiant.php
 
 # ---------------- Routes Models      ---------------- 
-RewriteRule ^AjouterRepository$ model/AjouterRepository.php
-RewriteRule ^ListeRepository$ model/ListeRepository.php
-RewriteRule ^ModifierRepository$ model/ModifierRepository.php
-RewriteRule ^SupprimerRepository$ model/SupprimerRepository.php
-RewriteRule ^RechercherRepository$ model/RechercherRepository.php
+RewriteRule ^EtudiantRepository$ model/EtudiantRepository.php
+RewriteRule ^NoteRepository$ model/NoteRepository.php
+RewriteRule ^EvaluationRepository$ model/EvaluationRepository.php

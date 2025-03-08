@@ -12,37 +12,23 @@
   <li class="nav-heading">Gestion des etudiants (Pages)</li>
 
   <li class="nav-item">
-    <a class="nav-link collapsed" href="pages-ajouter.html">
+    <a class="nav-link collapsed" href="pages-etudiant.html">
       <i class="bi bi-person-plus"></i>
-      <span>Ajouter </span>
+      <span>Etudiant </span>
     </a>
   </li>
 
   <li class="nav-item">
-    <a class="nav-link collapsed" href="pages-modifier.html">
+    <a class="nav-link collapsed" href="pages-note.html">
       <i class="bi bi-pencil-square"></i>
-      <span>Modifier </span>
+      <span>Note </span>
     </a>
   </li>
 
   <li class="nav-item">
-    <a class="nav-link collapsed" href="pages-supprimer.html">
-      <i class="bi bi-trash3"></i>
-      <span>Supprimer </span>
-    </a>
-  </li>
-
-  <li class="nav-item">
-    <a class="nav-link collapsed" href="pages-rechercher.html">
-      <i class="bi bi-search"></i>
-      <span>Rechercher </span>
-    </a>
-  </li>
-
-  <li class="nav-item">
-    <a class="nav-link collapsed" href="pages-liste.html">
-      <i class="bi bi-people"></i>
-      <span>Liste des etudiants</span>
+    <a class="nav-link collapsed" href="pages-evaluation.html">
+      <i class="bi bi-start-fill"></i>
+      <span>Evaluation </span>
     </a>
   </li>
 
