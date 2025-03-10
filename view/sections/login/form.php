@@ -10,18 +10,18 @@
   <form  action="admin" class="row g-3 needs-validation" novalidate>
 
     <div class="col-12">
-      <label for="yourUsername" class="form-label">Nom d'utilisateur</label>
+      <label for="yourUsername" class="form-label">Mail utilisateur</label>
       <div class="input-group has-validation">
         <span class="input-group-text" id="inputGroupPrepend">@</span>
-        <input type="text" name="username" class="form-control" id="yourUsername" required>
-        <div class="invalid-feedback">Entrer votre nom svp.</div>
+        <input type="email"  class="form-control"required>
+        <div class="invalid-feedback">Veuillez entrer un adresse valide.</div>
       </div>
     </div>
 
     <div class="col-12">
       <label for="yourPassword" class="form-label">Mot de passe</label>
       <input type="password" name="password" class="form-control" id="yourPassword" required>
-      <div class="invalid-feedback">Entrer votre mot de passe svp!</div>
+      <div class="invalid-feedback">Entrer un mot de passe valide!</div>
     </div>
 
     <div class="col-12">
