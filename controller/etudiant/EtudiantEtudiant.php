@@ -35,6 +35,7 @@ class EtudiantController
             $prenom = trim($_POST['prenom'] ?? '');
             $email = trim($_POST['email'] ?? '');
             $date_naissance = trim($_POST['date_naissance'] ?? '');
+            $date_inscription = trim($_POST['date_inscription'] ?? '');
 
             // Validation des données
             if (empty($nom) || empty($prenom) || empty($email) || empty($date_naissance)) {
@@ -42,7 +43,7 @@ class EtudiantController
             }
 
             try {
-                $lastInsertId = $this->etudiantRepository->add($nom, $prenom, $email, $date_naissance);
+                $lastInsertId = $this->etudiantRepository->add($nom, $prenom, $email, $date_naissance, $date_inscription);
 
                 if ($lastInsertId) {
                     $this->setSuccessAndRedirect("Étudiant ajouté avec succès", "Ajout réussi");

@@ -27,6 +27,8 @@
             Ajouter un étudiant
           </button>
 
+          <input type="text" id="searchStudent" class="form-control mb-3" placeholder="Rechercher un étudiant...">
+
           <table class="table table-bordered">
             <thead class="table-dark">
               <tr>
@@ -57,6 +59,7 @@
           </div>
           <div class="modal-body">
             <form id="studentForm">
+              <input type="hidden" id="studentId">
               <div class="mb-3">
                 <label for="nom" class="form-label">Nom</label>
                 <input type="text" class="form-control" id="nom" required>
@@ -73,7 +76,7 @@
                 <label for="dateNaissance" class="form-label">Date de naissance</label>
                 <input type="date" class="form-control" id="dateNaissance" required>
               </div>
-              <button type="submit" class="btn btn-primary">Ajouter</button>
+              <button type="submit" class="btn btn-primary">Enregistrer</button>
             </form>
           </div>
         </div>
@@ -88,6 +91,27 @@
   <!-- ==================== Section Base JS ==================== -->
   <?php require_once("../../../sections/admin/script.php")?>
 
-</body>
+  <script>
+    document.getElementById('searchStudent').addEventListener('input', function() {
+      let searchValue = this.value.toLowerCase();
+      let rows = document.querySelectorAll("#studentTableBody tr");
+      rows.forEach(row => {
+        let nom = row.children[1].textContent.toLowerCase();
+        let prenom = row.children[2].textContent.toLowerCase();
+        row.style.display = nom.includes(searchValue) || prenom.includes(searchValue) ? "" : "none";
+      });
+    });
 
+    function editStudent(id) {
+      // Implémentation de la modification d'un étudiant
+    }
+
+    function deleteStudent(id) {
+      if (confirm("Voulez-vous vraiment supprimer cet étudiant ?")) {
+        // Implémentation de la suppression d'un étudiant
+      }
+    }
+  </script>
+
+</body>
 </html>
