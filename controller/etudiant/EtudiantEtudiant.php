@@ -1,6 +1,6 @@
 <?php 
 session_start();
-require_once("model/EtudiantRepository.php");
+require_once("../../model/EtudiantRepository.php");
 
 class EtudiantController
 {

@@ -1,5 +1,5 @@
 <?php
-require_once(__DIR__ . "/EtudiantEtudiant.php");
+require_once("EtudiantEtudiant.php");
 
 $etudiantController = new EtudiantController();
 

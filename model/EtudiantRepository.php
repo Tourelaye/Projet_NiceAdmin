@@ -12,16 +12,23 @@ class EtudiantRepository extends DBRepository
         
         try {
             $statement = $this->connexion->prepare($sql);
-            $statement->execute([
+            $success = $statement->execute([
                 'nom' => $nom,
                 'prenom' => $prenom,
                 'email' => $email,
                 'date_naissance' => $date_naissance
             ]);
             
-            return $this->connexion->lastInsertId() ?: null;
+            if ($success) {
+                echo "Insertion réussie, ID: " . $this->connexion->lastInsertId();
+                return $this->connexion->lastInsertId() ?: null;
+            } else {
+                echo "Échec de l'insertion.";
+                return null;
+            }
         } catch (PDOException $error) {
             error_log("Erreur lors de l'ajout de l'étudiant: " . $error->getMessage());
+            echo "Erreur SQL : " . $error->getMessage();
             throw $error;
         }
     }

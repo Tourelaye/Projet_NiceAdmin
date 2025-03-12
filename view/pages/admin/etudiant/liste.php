@@ -37,7 +37,7 @@
                 <th>Prénom</th>
                 <th>Email</th>
                 <th>Date de naissance</th>
-                <th>Actions</th>
+                <th>Date d'inscription</th>
               </tr>
             </thead>
             <tbody id="studentTableBody">
@@ -74,6 +74,10 @@
               </div>
               <div class="mb-3">
                 <label for="dateNaissance" class="form-label">Date de naissance</label>
+                <input type="date" class="form-control" id="dateNaissance" required>
+              </div>
+              <div class="mb-3">
+                <label for="dateNaissance" class="form-label">Date d'inscription</label>
                 <input type="date" class="form-control" id="dateNaissance" required>
               </div>
               <button type="submit" class="btn btn-primary">Enregistrer</button>
