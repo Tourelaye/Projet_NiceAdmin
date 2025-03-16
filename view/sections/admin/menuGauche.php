@@ -20,7 +20,7 @@
 
   <li class="nav-item">
     <a class="nav-link collapsed" href="pages-evaluation.html">
-      <i class="bi bi-start-fill"></i>
+      <i class="bi bi-star-fill"></i>
       <span>Evaluation </span>
     </a>
   </li>
