@@ -68,41 +68,49 @@
               <div class="mb-3">
                 <label for="nom" class="form-label">Nom</label>
                 <input type="text" class="form-control" id="nom" name="nom" required>
+                <p class="error-message"></p>
               </div>
               
               <div class="mb-3">
                 <label for="prenom" class="form-label">Prénom</label>
                 <input type="text" class="form-control" id="prenom" name="prenom" required>
+                <p class="error-message"></p>
               </div>
               
               <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
                 <input type="email" class="form-control" id="email" name="email" required>
+                <p class="error-message"></p>
               </div>
               
               <div class="mb-3">
                 <label for="date_naissance" class="form-label">Date de naissance</label>
                 <input type="date" class="form-control" id="date_naissance" name="date_naissance" required>
+                <p class="error-message"></p>
               </div>
               
               <div class="mb-3">
                 <label for="date_inscription" class="form-label">Date d'inscription</label>
                 <input type="date" class="form-control" id="date_inscription" name="date_inscription" required>
+                <p class="error-message"></p>
               </div>
               
               <div class="mb-3">
                 <label for="adresse" class="form-label">Adresse</label>
                 <input type="text" class="form-control" id="adresse" name="adresse" required>
+                <p class="error-message"></p>
               </div>
               
               <div class="mb-3">
                 <label for="nationalite" class="form-label">Nationalité</label>
                 <input type="text" class="form-control" id="nationalite" name="nationalite" required>
+                <p class="error-message"></p>
               </div>
               
               <div class="mb-3">
                 <label for="matricule" class="form-label">Matricule</label>
                 <input type="text" class="form-control" id="matricule" name="matricule" required>
+                <p class="error-message"></p>
               </div>
               
               <div class="mb-3">
@@ -134,37 +142,3 @@
 
 </body>
 </html>
-
-<script>
-  // Fonction pour récupérer et afficher les étudiants
-  function loadStudents() {
-    fetch("../../../controllers/etudiant/EtudiantMainEtudiant.php?action=getAll")
-      .then(response => response.json())
-      .then(data => {
-        let tbody = document.getElementById("studentTableBody");
-        tbody.innerHTML = ""; // Vider le tableau avant de le remplir
-
-        if (data.length > 0) {
-          data.forEach(etudiant => {
-            let row = `
-              <tr>
-                <td>${etudiant.id}</td>
-                <td>${etudiant.nom}</td>
-                <td>${etudiant.prenom}</td>
-                <td>${etudiant.email}</td>
-                <td>${etudiant.date_naissance}</td>
-                <td>${etudiant.date_inscription}</td>
-              </tr>
-            `;
-            tbody.innerHTML += row;
-          });
-        } else {
-          tbody.innerHTML = `<tr><td colspan="6" class="text-center">Aucun étudiant trouvé.</td></tr>`;
-        }
-      })
-      .catch(error => console.error("Erreur de chargement des étudiants :", error));
-  }
-
-  // Charger les étudiants au chargement de la page
-  document.addEventListener("DOMContentLoaded", loadStudents);
-</script>

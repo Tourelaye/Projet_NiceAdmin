@@ -9,3 +9,7 @@
 
 <!-- Template Main JS File -->
 <script src="public/templates/templateAdmin/assets/js/main.js"></script>
+   
+<!-- Ajout des scripts personnalise -->
+<script src="public/js/global/Validator.js"></script>
+<script src="public/js/etudiant/addFormValidator.js"></script>

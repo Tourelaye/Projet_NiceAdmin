@@ -4,6 +4,10 @@ const prenomInput = document.getElementById("prenom");
 const emailInput = document.getElementById("email");
 const date_naissanceInput = document.getElementById("date_naissance");
 const date_inscriptionInput = document.getElementById("date_inscription");
+const adresseInput = document.getElementById("adresse");
+const nationaliteInput = document.getElementById("nationalite");
+const matriculeInput = document.getElementById("matricule");
+const sexeInput = document.getElementById("sexe");
 const frmAddEtudiant = document.getElementById("addEtudiantForm");
 const btnSubmit = frmAddEtudiant.querySelector("button[type='submit']");
 
@@ -12,23 +16,29 @@ let isPrenomValid = false;
 let isEmailValid = false;
 let isDateNaissanceValid = false;
 let isDateInscriptionValid = false;
+let isAdresseValid = false;
+let isNationaliteValid = false;
+let isMatriculeValid = false;
+let isSexeValid = false;
 btnSubmit.disabled = false;
 
 //Permet d'afficher ou masquer les messages d'erreur
-function showError(input, message)
-{
-    const baliseP = input.nextElementSibling;
-    if(message){
-        baliseP.textContent = message;
-        input.classList.add("is-invalid");
-        baliseP.style.color = "brown";
-        baliseP.style.fontWeight = "bold";
-    }
-    else{
-        baliseP.textContent = "";
-        input.classList.remove("is-invalid");
+function showError(input, message) {
+    const baliseP = input.nextElementSibling; // Sélectionne l'élément <p class="error-message"> juste après l'input
+
+    if (baliseP && baliseP.classList.contains("error-message")) { 
+        if (message) {
+            baliseP.textContent = message;
+            input.classList.add("is-invalid");
+            baliseP.style.color = "brown";
+            baliseP.style.fontWeight = "bold";
+        } else {
+            baliseP.textContent = "";
+            input.classList.remove("is-invalid");
+        }
     }
 }
+
 
 function checkFormValidity()
 {
@@ -72,14 +82,12 @@ prenomInput.addEventListener("input", () => {
 // Validation du champ email a la saisie
 emailInput.addEventListener("input", () => {
     const email = emailInput.value.trim();
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; 
+    const emailValidator = Validator.emailValidator("L'email", email);
 
-    if (!emailPattern.test(email)) {
-        showError(emailInput, "L'email est invalide.");
-        isEmailValid = false;
+    if (emailValidator) {
+        showError(emailInput, emailValidator.message);
     } else {
         showError(emailInput, "");
-        isEmailValid = true;
     }
 
     checkFormValidity();
@@ -117,6 +125,32 @@ date_inscriptionInput.addEventListener("input", () =>{
     }
     checkFormValidity();
 })
+
+// Fonction pour valider l'adresse
+adresseInput.addEventListener("input", () => {
+    const adresse = adresseInput.value.trim();
+    const adresseValidator = Validator.isLength(adresse, {min : 5 });
+
+    if(!adresseValidator){
+        showError(adresseInput, "L'adresse doit contenir au moins 5 carateres.");
+    } else{
+        showError(adresseInput);
+    }
+});
+
+// Fonction pour valider la nationalite
+nationaliteInput.addEventListener("input", () => {
+    const nationalite = nationaliteInput.value.trim();
+
+    // Verifier si la nationalite contient uniquement des lettres et au moins 3 caracteres
+    const nationaliteValidator = validator.isAlpha(nationalite, "fr-FR", {ignore: " -"}) && Validator.isLength(nationalite, {min: 3});
+    
+    if(!nationaliteValidator){
+        showError(nationaliteInput, "La nationalite doit contenir au moins 3 lettres et ne doit pas inclure de chiffes.");
+    } else{
+        showError(nationaliteInput);
+    }
+});
 
 frmAddEtudiant.addEventListener("reset", () => {
     isNomValid = false;

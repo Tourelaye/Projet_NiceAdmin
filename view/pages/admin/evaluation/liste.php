@@ -74,8 +74,8 @@
 
               <!-- Sélection de l'évaluation -->
               <div class="mb-3">
-                <label for="evaluation" class="form-label">Type d'évaluation</label>
-                <select class="form-control" id="evaluation" required>
+                <label for="type_evaluation" class="form-label">Type d'évaluation</label>
+                <select class="form-control" id="type_evaluation" required>
                   <option value="1">Devoir</option>
                   <option value="2">Examen</option>
                   <!-- Ajoute d'autres types si nécessaire -->
@@ -85,7 +85,8 @@
                 <label for="date_limite" class="form-label">Date limite</label>
                 <input type="date" class="form-control" id="date_limite" required>
               </div>
-              <button type="submit" class="btn btn-primary">Enregistrer</button>
+              <button type="submit" name="frmAddEvaluation" value="1" class="btn btn-primary">Enregistrer</button>
+              <button type="reset" class="btn btn-danger">Annuler</button>
             </form>
           </div>
         </div>

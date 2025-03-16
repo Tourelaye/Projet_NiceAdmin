@@ -4,7 +4,7 @@
     class EvaluationRepository extends DBRepository
     {
         // Ajouter une evaluation
-        public function register($etudiant_id,	$titre,	$description,	$date_limite, $created_by, $type_evaluation ): ?int
+        public function addEvaluation($etudiant_id,	$titre,	$description,	$date_limite, $created_by, $type_evaluation ): ?int
         {
                 $sql = "INSERT INTO evaluations (etudiant_id, titre, description, date_limite, created_by, type_evaluation)
                 VALUES (:etudiant_id, :titre, :description, :date_limite, :created_by, :type_evaluation)";
