@@ -59,27 +59,50 @@
           <div class="modal-body">
             <form id="noteForm">
               <input type="hidden" id="noteId">
+
+              <!-- Sélection de l'étudiant -->
               <div class="mb-3">
                 <label for="etudiant" class="form-label">Étudiant</label>
                 <select class="form-control" id="etudiant" required>
                   <!-- Options dynamiques -->
                 </select>
               </div>
+
+              <!-- Sélection de la matière -->
               <div class="mb-3">
                 <label for="matiere" class="form-label">Matière</label>
                 <select class="form-control" id="matiere" required>
                   <!-- Options dynamiques -->
                 </select>
               </div>
+
+              <!-- Sélection de l'évaluation -->
               <div class="mb-3">
-                <label for="noteDevoir" class="form-label">Note Devoir</label>
-                <input type="number" class="form-control" id="noteDevoir" required>
+                <label for="evaluation" class="form-label">Type d'évaluation</label>
+                <select class="form-control" id="evaluation" required>
+                  <option value="1">Devoir</option>
+                  <option value="2">Examen</option>
+                  <!-- Ajoute d'autres types si nécessaire -->
+                </select>
               </div>
+
+              <!-- Saisie de la note -->
               <div class="mb-3">
-                <label for="noteExamen" class="form-label">Note Examen</label>
-                <input type="number" class="form-control" id="noteExamen" required>
+                <label for="note" class="form-label">Note</label>
+                <input type="number" class="form-control" id="note" min="0" max="20" step="0.01" required>
               </div>
+
+              <!-- Saisie du coefficient -->
+              <div class="mb-3">
+                <label for="coefficient" class="form-label">Coefficient</label>
+                <input type="number" class="form-control" id="coefficient" min="1" max="10" step="0.1" required>
+              </div>
+
+              <!-- Champ caché pour "created_by" -->
+              <input type="hidden" id="created_by" value="1"> <!-- Modifier dynamiquement avec l'ID de l'utilisateur -->
+
               <button type="submit" class="btn btn-primary">Enregistrer</button>
+              <button type="reset" class="btn btn-danger">Annuler</button>
             </form>
           </div>
         </div>

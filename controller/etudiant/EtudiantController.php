@@ -12,7 +12,7 @@ class EtudiantController
     }
 
     // Permet de retourner un message d'erreur
-    private function setErrorAndRedirect($message, $title, $redirectUrl = 'etudiant')
+    private function setErrorAndRedirect($message, $title, $redirectUrl = 'admin')
     {
         $_SESSION["error"] = $message;
         header("Location:$redirectUrl?error=1&message=" . urlencode($message) . "&title=" . urlencode($title));
@@ -20,7 +20,7 @@ class EtudiantController
     }
 
     // Permet de retourner un message de succès
-    private function setSuccessAndRedirect($message, $title, $redirectUrl = 'etudiant')
+    private function setSuccessAndRedirect($message, $title, $redirectUrl = 'admin')
     {
         $_SESSION["success"] = $message;
         header("Location:$redirectUrl?success=1&message=" . urlencode($message) . "&title=" . urlencode($title));
@@ -36,14 +36,19 @@ class EtudiantController
             $email = trim($_POST['email'] ?? '');
             $date_naissance = trim($_POST['date_naissance'] ?? '');
             $date_inscription = trim($_POST['date_inscription'] ?? '');
+            $adresse = trim($_POST['adresse'] ?? '');
+            $nationalite = trim($_POST['nationalite'] ?? '');
+            $matricule = trim($_POST['matricule'] ?? '');
+            $sexe = trim($_POST['sexe'] ?? '');
+            $created_by = $_SESSION['user_id'] ?? null;
 
             // Validation des données
-            if (empty($nom) || empty($prenom) || empty($email) || empty($date_naissance)) {
+            if (empty($nom) || empty($prenom) || empty($email) || empty($date_naissance) || empty($date_inscription) || empty($adresse) || empty($nationalite) || empty($matricule) || empty($sexe)) {
                 $this->setErrorAndRedirect("Tous les champs sont requis", "Erreur d'ajout");
             }
 
             try {
-                $lastInsertId = $this->etudiantRepository->add($nom, $prenom, $email, $date_naissance, $date_inscription);
+                $lastInsertId = $this->etudiantRepository->addEtudiant($nom, $prenom, $email, $date_naissance, $date_inscription, $adresse, $nationalite, $matricule, $sexe, $created_by);
 
                 if ($lastInsertId) {
                     $this->setSuccessAndRedirect("Étudiant ajouté avec succès", "Ajout réussi");
@@ -54,6 +59,11 @@ class EtudiantController
                 die("Erreur : " . $th->getMessage());
             }
         }
+    }
+
+
+    public function getAll(){
+        return $this->etudiantRepository->getAll();
     }
 }
 ?>

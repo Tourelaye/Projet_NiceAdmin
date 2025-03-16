@@ -35,8 +35,8 @@
                 <th>Étudiant</th>
                 <th>Titre</th>
                 <th>Description</th>
+                <th> Type evaluation</th>
                 <th>Date limite</th>
-                <th>Actions</th>
               </tr>
             </thead>
             <tbody id="evaluationTableBody">
@@ -70,6 +70,16 @@
               <div class="mb-3">
                 <label for="description" class="form-label">Description</label>
                 <textarea class="form-control" id="description" required></textarea>
+              </div>
+
+              <!-- Sélection de l'évaluation -->
+              <div class="mb-3">
+                <label for="evaluation" class="form-label">Type d'évaluation</label>
+                <select class="form-control" id="evaluation" required>
+                  <option value="1">Devoir</option>
+                  <option value="2">Examen</option>
+                  <!-- Ajoute d'autres types si nécessaire -->
+                </select>
               </div>
               <div class="mb-3">
                 <label for="date_limite" class="form-label">Date limite</label>

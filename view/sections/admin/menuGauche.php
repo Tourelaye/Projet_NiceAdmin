@@ -19,16 +19,15 @@
   </li>
 
   <li class="nav-item">
-    <a class="nav-link collapsed" href="pages-note.html">
-      <i class="bi bi-pencil-square"></i>
-      <span>Note </span>
-    </a>
-  </li>
-
-  <li class="nav-item">
     <a class="nav-link collapsed" href="pages-evaluation.html">
       <i class="bi bi-start-fill"></i>
       <span>Evaluation </span>
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link collapsed" href="pages-note.html">
+      <i class="bi bi-pencil-square"></i>
+      <span>Note </span>
     </a>
   </li>
 

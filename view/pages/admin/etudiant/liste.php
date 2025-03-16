@@ -38,6 +38,10 @@
                 <th>Email</th>
                 <th>Date de naissance</th>
                 <th>Date d'inscription</th>
+                <th>Adresse</th>
+                <th>Nationalite</th>
+                <th>Matricule</th>
+                <th>Sexe</th>
               </tr>
             </thead>
             <tbody id="studentTableBody">
@@ -58,34 +62,65 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
           </div>
           <div class="modal-body">
-            <form id="studentForm">
+            <form action="EtudiantController" method="POST">
               <input type="hidden" id="studentId">
+              
               <div class="mb-3">
                 <label for="nom" class="form-label">Nom</label>
-                <input type="text" class="form-control" id="nom" required>
+                <input type="text" class="form-control" id="nom" name="nom" required>
               </div>
+              
               <div class="mb-3">
                 <label for="prenom" class="form-label">Prénom</label>
-                <input type="text" class="form-control" id="prenom" required>
+                <input type="text" class="form-control" id="prenom" name="prenom" required>
               </div>
+              
               <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="email" required>
+                <input type="email" class="form-control" id="email" name="email" required>
               </div>
+              
               <div class="mb-3">
-                <label for="dateNaissance" class="form-label">Date de naissance</label>
-                <input type="date" class="form-control" id="dateNaissance" required>
+                <label for="date_naissance" class="form-label">Date de naissance</label>
+                <input type="date" class="form-control" id="date_naissance" name="date_naissance" required>
               </div>
+              
               <div class="mb-3">
-                <label for="dateNaissance" class="form-label">Date d'inscription</label>
-                <input type="date" class="form-control" id="dateNaissance" required>
+                <label for="date_inscription" class="form-label">Date d'inscription</label>
+                <input type="date" class="form-control" id="date_inscription" name="date_inscription" required>
               </div>
-              <button type="submit" class="btn btn-primary">Enregistrer</button>
+              
+              <div class="mb-3">
+                <label for="adresse" class="form-label">Adresse</label>
+                <input type="text" class="form-control" id="adresse" name="adresse" required>
+              </div>
+              
+              <div class="mb-3">
+                <label for="nationalite" class="form-label">Nationalité</label>
+                <input type="text" class="form-control" id="nationalite" name="nationalite" required>
+              </div>
+              
+              <div class="mb-3">
+                <label for="matricule" class="form-label">Matricule</label>
+                <input type="text" class="form-control" id="matricule" name="matricule" required>
+              </div>
+              
+              <div class="mb-3">
+                <label for="sexe" class="form-label">Sexe</label>
+                <select class="form-control" id="sexe" name="sexe" required>
+                  <option value="M">Masculin</option>
+                  <option value="F">Féminin</option>
+                </select>
+              </div>
+              
+              <button type="submit" name="frmAddEtudiant" value="1" class="btn btn-primary">Enregistrer</button>
+              <button type="reset" class="btn btn-danger">Annuler</button>
             </form>
           </div>
         </div>
       </div>
     </div>
+
 
   </main>
 
@@ -95,27 +130,41 @@
   <!-- ==================== Section Base JS ==================== -->
   <?php require_once("../../../sections/admin/script.php")?>
 
-  <script>
-    document.getElementById('searchStudent').addEventListener('input', function() {
-      let searchValue = this.value.toLowerCase();
-      let rows = document.querySelectorAll("#studentTableBody tr");
-      rows.forEach(row => {
-        let nom = row.children[1].textContent.toLowerCase();
-        let prenom = row.children[2].textContent.toLowerCase();
-        row.style.display = nom.includes(searchValue) || prenom.includes(searchValue) ? "" : "none";
-      });
-    });
 
-    function editStudent(id) {
-      // Implémentation de la modification d'un étudiant
-    }
-
-    function deleteStudent(id) {
-      if (confirm("Voulez-vous vraiment supprimer cet étudiant ?")) {
-        // Implémentation de la suppression d'un étudiant
-      }
-    }
-  </script>
 
 </body>
 </html>
+
+<script>
+  // Fonction pour récupérer et afficher les étudiants
+  function loadStudents() {
+    fetch("../../../controllers/etudiant/EtudiantMainEtudiant.php?action=getAll")
+      .then(response => response.json())
+      .then(data => {
+        let tbody = document.getElementById("studentTableBody");
+        tbody.innerHTML = ""; // Vider le tableau avant de le remplir
+
+        if (data.length > 0) {
+          data.forEach(etudiant => {
+            let row = `
+              <tr>
+                <td>${etudiant.id}</td>
+                <td>${etudiant.nom}</td>
+                <td>${etudiant.prenom}</td>
+                <td>${etudiant.email}</td>
+                <td>${etudiant.date_naissance}</td>
+                <td>${etudiant.date_inscription}</td>
+              </tr>
+            `;
+            tbody.innerHTML += row;
+          });
+        } else {
+          tbody.innerHTML = `<tr><td colspan="6" class="text-center">Aucun étudiant trouvé.</td></tr>`;
+        }
+      })
+      .catch(error => console.error("Erreur de chargement des étudiants :", error));
+  }
+
+  // Charger les étudiants au chargement de la page
+  document.addEventListener("DOMContentLoaded", loadStudents);
+</script>

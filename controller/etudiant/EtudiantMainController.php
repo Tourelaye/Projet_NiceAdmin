@@ -1,5 +1,5 @@
 <?php
-require_once("EtudiantEtudiant.php");
+require_once("EtudiantController.php");
 
 $etudiantController = new EtudiantController();
 

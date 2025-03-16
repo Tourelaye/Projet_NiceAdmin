@@ -31,7 +31,7 @@
       </div>
     </div>
     <div class="col-12">
-      <button class="btn btn-primary w-100" type="submit">Se connecter</button>
+      <button class="btn btn-primary w-100" type="submit" id="btnSubmit" name="formLogin">Se connecter</button>
     </div>
     <div class="col-12">
       <p class="small mb-0">Vous ne possedez pas de compte? <a href="pages-register.html">Creer un compte</a></p>

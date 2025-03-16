@@ -26,8 +26,8 @@ class DBRepository
             $this->db = new PDO($dsn, $this->user, $this->password);
             $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $error) {
-            error_log("Erreur de connexion à la BD : " . $error->getMessage());
-            die("Une erreur est survenue lors de la connexion à la base de données.");
+            // error_log("Erreur de connexion à la BD : " . $error->getMessage());
+            die("Erreur de connexion à la BD : " . $error->getMessage());
         }
     }
 }
