@@ -59,7 +59,8 @@
             <form id="evaluationForm">
               <div class="mb-3">
                 <label for="etudiant_id" class="form-label">Étudiant</label>
-                <select class="form-control" id="etudiant_id" required>
+                <select class="form-control" id="etudiant_id" name="etudiant_id" required>
+                  <option value="">Selectionner un etudiant </option>
                   <!-- Options des étudiants seront chargées ici -->
                 </select>
               </div>

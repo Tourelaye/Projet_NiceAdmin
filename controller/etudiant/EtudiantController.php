@@ -65,5 +65,32 @@ class EtudiantController
     public function getAll(){
         return $this->etudiantRepository->getAll();
     }
+
+    public function getEtudiantById($id)
+    {
+        try {
+            $etudiant = $this->etudiantRepository->getEtudiantById($id);
+            if ($etudiant) {
+                echo json_encode($etudiant);
+            } else {
+                http_response_code(404);
+                echo json_encode(["error" => "Étudiant non trouvé."]);
+            }
+        } catch (Exception $e) {
+            http_response_code(500);
+            echo json_encode(["error" => "Erreur serveur lors de la récupération de l'étudiant."]);
+        }
+    
+
+    // Gestion des requêtes GET pour AJAX
+    if (isset($_GET['action']) && $_GET['action'] === 'list') {
+        $controller = new EtudiantController();
+        echo json_encode($controller->getAll());
+    } elseif (isset($_GET['id'])) {
+        $controller = new EtudiantController();
+        $controller->getEtudiantById($_GET['id']);
+        }
+
+    }
 }
 ?>

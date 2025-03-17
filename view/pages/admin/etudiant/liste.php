@@ -103,9 +103,34 @@
               
               <div class="mb-3">
                 <label for="nationalite" class="form-label">Nationalité</label>
-                <input type="text" class="form-control" id="nationalite" name="nationalite" required>
-                <p class="error-message"></p>
+                <input type="text" class="form-control" id="nationalite" name="nationalite" list="nationalites">
+                <datalist id="nationalites">
+                  <option value="Sénégalaise"></option>
+                  <option value="Française"></option>
+                  <option value="Malienne"></option>
+                  <option value="Marocaine"></option>
+                  <option value="Ivoirienne"></option>
+                  <option value="Nigériane"></option>
+                  <option value="Algérienne"></option>
+                  <option value="Tunisienne"></option>
+                  <option value="Américaine"></option>
+                  <option value="Espagnole"></option>
+                  <option value="Chinoise"></option>
+                  <option value="Indienne"></option>
+                  <option value="Canadienne"></option>
+                  <option value="Allemande"></option>
+                  <option value="Brésilienne"></option>
+                  <option value="Portugaise"></option>
+                  <option value="Italienne"></option>
+                  <option value="Anglaise"></option>
+                  <option value="Sud-africaine"></option>
+                  <option value="Ghanéenne"></option>
+                  <option value="Congolaise"></option>
+                  <option value="Burkinabé"></option>
+                  <option value="Égyptienne"></option>
+                </datalist>
               </div>
+
               
               <div class="mb-3">
                 <label for="matricule" class="form-label">Matricule</label>

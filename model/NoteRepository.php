@@ -4,10 +4,10 @@ require_once("DBRepository.php");
 class NoteRepository extends DBRepository
 {
     // Ajouter une note
-    public function addNote($etudiant_id, $matiere, $note, $coefficient,  $evaluation_id): ?int
+    public function addNote($etudiant_id, $matiere, $note, $coefficient, $created_by, $evaluation_id): ?int
     {
-        $sql = "INSERT INTO notes (etudiant_id, matiere, note, coefficient, evaluation_id)
-                VALUES (:etudiant_id, :matiere, :note, :coefficient, NOW(), :evaluation_id)";
+        $sql = "INSERT INTO notes (etudiant_id, matiere, note, coefficient, created_at, created_by, evaluation_id)
+                VALUES (:etudiant_id, :matiere, :note, :coefficient, NOW(), :created_by, :evaluation_id)";
 
         try {
             $statement = $this->db->prepare($sql);
@@ -16,6 +16,7 @@ class NoteRepository extends DBRepository
                 'matiere' => $matiere,
                 'note' => $note,
                 'coefficient' => $coefficient,
+                'created_by' => $created_by,
                 'evaluation_id' => $evaluation_id
             ]);
 
