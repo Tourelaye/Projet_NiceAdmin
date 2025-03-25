@@ -1,3 +1,9 @@
+<?php
+  require_once("../../../../model/EtudiantRepository.php");
+  $etudiantRepository = new EtudiantRepository();
+  $etudiant = $etudiantRepository->getAll();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,20 +38,38 @@
           <table class="table table-bordered">
             <thead class="table-dark">
               <tr>
-                <th>ID</th>
-                <th>Nom</th>
-                <th>Prénom</th>
-                <th>Email</th>
-                <th>Date de naissance</th>
-                <th>Date d'inscription</th>
-                <th>Adresse</th>
-                <th>Nationalite</th>
-                <th>Matricule</th>
-                <th>Sexe</th>
+                <th width="1%">ID</th>
+                <th class ="tect-nowrap">Nom</th>
+                <th class ="tect-nowrap">Prénom</th>
+                <th class ="tect-nowrap">Email</th>
+                <!-- <th class ="tect-nowrap">Date de naissance</th>
+                <th class ="tect-nowrap">Date d'inscription</th> -->
+                <th class ="tect-nowrap">Adresse</th>
+                <th class ="tect-nowrap">Nationalite</th>
+                <th class ="tect-nowrap">Matricule</th>
+                <th class ="tect-nowrap">Sexe</th>
               </tr>
             </thead>
-            <tbody id="studentTableBody">
+            <tbody >
               <!-- Les étudiants seront affichés ici dynamiquement -->
+               <?php if (!empty($etudiant)): ?>
+                  <?php foreach ($etudiant as $etudiant): ?>
+                    <tr>
+                      <td><?= htmlspecialchars($etudiant['id']) ?></td>
+                      <td><?= htmlspecialchars($etudiant['nom']) ?></td>
+                      <td><?= htmlspecialchars($etudiant['prenom']) ?></td>
+                      <td><?= htmlspecialchars($etudiant['email']) ?></td>
+                      <!-- <td><?= htmlspecialchars($etudiant['dateNaissance']) ?></td>
+                      <td><?= htmlspecialchars($etudiant['dateInscription']) ?></td> -->
+                      <td><?= htmlspecialchars($etudiant['adresse']) ?></td>
+                      <td><?= htmlspecialchars($etudiant['nationalite']) ?></td>
+                      <td><?= htmlspecialchars($etudiant['matricule']) ?></td>  
+                      <td><?= htmlspecialchars($etudiant['sexe']) ?></td>
+                      <td>
+                    </tr>
+                  <?php endforeach; ?>
+                <?php endif; ?>    
+
             </tbody>
           </table>
 

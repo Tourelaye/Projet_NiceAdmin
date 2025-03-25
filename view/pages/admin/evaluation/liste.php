@@ -1,3 +1,9 @@
+<?php
+  require_once("../../../../model/EvaluationRepository.php");
+  $evaluationRepository = new EvaluationRepository();
+  $evaluation = $evaluationRepository->getAll();
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -31,16 +37,33 @@
           <table class="table table-bordered">
             <thead class="table-dark">
               <tr>
-                <th>ID</th>
-                <th>Étudiant</th>
-                <th>Titre</th>
-                <th>Description</th>
-                <th> Type evaluation</th>
-                <th>Date limite</th>
+                <th width="1%">ID</th>
+                <th class ="tect-nowrap">Étudiant</th>
+                <th class ="tect-nowrap">Titre</th>
+                <th class ="tect-nowrap">Description</th>
+                <th class ="tect-nowrap"> Type evaluation</th>
+                <th class ="tect-nowrap">Date limite</th>
               </tr>
             </thead>
-            <tbody id="evaluationTableBody">
+            <tbody>
               <!-- Les évaluations seront affichées ici dynamiquement -->
+                <?php if (!empty($evaluation)): ?>
+                  <?php foreach ($evaluation as $evaluation): ?>
+                    <tr>
+                    <td><?= htmlspecialchars($evaluation['id']) ?></td>
+                    <td><?= htmlspecialchars($evaluation['etudiant']) ?></td> 
+                    <td><?= htmlspecialchars($evaluation['titre']) ?></td>
+                    <td><?= htmlspecialchars($evaluation['description']) ?></td>
+                    <td><?= htmlspecialchars($evaluation['type_evaluation']) ?></td>
+                    <td><?= htmlspecialchars($evaluation['date_limite']) ?></td>
+                    </tr>
+                  <?php endforeach; ?>
+                <?php endif; ?>
+
+
+
+
+
             </tbody>
           </table>
         </div>

@@ -3,19 +3,19 @@ require_once("DBRepository.php");
 
 class NoteRepository
 {
-    private $conn;
+    private $db;
 
     public function __construct()
     {
         $database = new Database();
-        $this->conn = $database->getConnection();
+        $this->db = $database->getConnection();
     }
 
     // Ajouter une note
     public function addNote($etudiant_id, $matiere, $note, $created_by)
     {
         $sql = "INSERT INTO notes (etudiant_id, matiere, note, created_by) VALUES (?, ?, ?, ?)";
-        $stmt = $this->conn->prepare($sql);
+        $stmt = $this->db->prepare($sql);
         $stmt->bind_param("isdi", $etudiant_id, $matiere, $note, $created_by);
         return $stmt->execute();
     }
@@ -26,7 +26,7 @@ class NoteRepository
         $sql = "SELECT n.id, e.nom, e.prenom, n.matiere, n.note 
                 FROM notes n
                 JOIN etudiants e ON n.etudiant_id = e.id";
-        $result = $this->conn->query($sql);
+        $result = $this->db->query($sql);
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 }

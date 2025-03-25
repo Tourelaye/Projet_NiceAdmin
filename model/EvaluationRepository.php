@@ -30,7 +30,7 @@
         // Recuperer toutes les evaluations actives
         public function getAll()
         {
-            $sql = "SELECT e.*, et.nom, et,prenom
+            $sql = "SELECT e.*, et.nom, et.prenom
                     FROM evaluations e
                     JOIN etudiants et ON e.etudiant_id = et.id
                     WHERE e.deleted_at IS NULL
