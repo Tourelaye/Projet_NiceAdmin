@@ -1,18 +1,9 @@
-<?php 
-session_start();
-require_once("../../model/NoteRepository.php");
+<?php
+require_once("NoteController.php");
 
-class NoteMainController
-{
-    private $noteRepository;
+$noteController = new NoteController();
 
-    public function __construct()
-    {
-        $this->noteRepository = new NoteRepository();
-    }
-
-    public function getAllNotes(){
-        return $this->noteRepository->getAll();
-    }
+if (isset($_POST["frmAddNote"])) {
+    $noteController->addNote();
 }
 ?>

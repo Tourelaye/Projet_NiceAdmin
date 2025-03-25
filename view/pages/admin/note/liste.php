@@ -101,7 +101,7 @@
               <!-- Champ caché pour "created_by" -->
               <input type="hidden" id="created_by" value="1"> <!-- Modifier dynamiquement avec l'ID de l'utilisateur -->
 
-              <button type="submit" class="btn btn-primary">Enregistrer</button>
+              <button type="submit" name="frmAddNote" value="1" class="btn btn-primary">Enregistrer</button>
               <button type="reset" class="btn btn-danger">Annuler</button>
             </form>
           </div>

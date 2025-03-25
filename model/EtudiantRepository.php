@@ -17,10 +17,12 @@ class EtudiantRepository extends DBRepository
         }
     }
 
+   
+
     // Récupérer un étudiant par ID
     public function getEtudiantById(int $id)
     {
-        $sql = "SELECT * FROM etudiants WHERE id = :id AND deleted_at IS NULL";
+        $sql = "SELECT id, nom, prenom FROM etudiants WHERE id = :id";
         try {
             $statement = $this->db->prepare($sql);
             $statement->bindParam(':id', $id, PDO::PARAM_INT);

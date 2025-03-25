@@ -34,6 +34,8 @@ class NoteController
             $etudiant_id = trim($_POST['etudiant_id'] ?? '');
             $matiere = trim($_POST['matiere'] ?? '');
             $note = trim($_POST['note'] ?? '');
+            $coefficient = trim($_POST['coefficient'] ?? '');
+            $evaluation_id = trim($_POST['evaluation_id'] ?? '');
             $created_by = $_SESSION['user_id'] ?? null;
 
             // Vérification des champs
@@ -42,7 +44,7 @@ class NoteController
             }
 
             try {
-                $lastInsertId = $this->noteRepository->addNote($etudiant_id, $matiere, $note, $created_by);
+                $lastInsertId = $this->noteRepository->addNote($etudiant_id, $matiere, $note, $coefficient, $created_by, $evaluation_id);
 
                 if ($lastInsertId) {
                     $this->setSuccessAndRedirect("Note ajoutée avec succès", "Ajout réussi");
