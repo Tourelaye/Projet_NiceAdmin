@@ -3,92 +3,90 @@
 
     class EvaluationRepository extends DBRepository
     {
-        // Ajouter une evaluation
-        public function addEvaluation($etudiant_id,	$titre,	$description,	$date_limite, $created_by, $type_evaluation ): ?int
+        // Ajouter une évaluation
+        public function addEvaluation($etudiant_id, $nom, $semestre, $type_evaluation, $created_by): ?int
         {
-                $sql = "INSERT INTO evaluations (etudiant_id, titre, description, date_limite, created_by, type_evaluation)
-                VALUES (:etudiant_id, :titre, :description, :date_limite, :created_by, :type_evaluation)";
+            $sql = "INSERT INTO evaluations (etudiant_id, nom, semestre, type_evaluation, created_by, created_at)
+                    VALUES (:etudiant_id, :nom, :semestre, :type_evaluation, :created_by, NOW())";
 
-                try{
-                    $statement = $this->db->prepare($sql);
-                    $statement->execute([
-                        'etudiant_id' => $etudiant_id,
-                        'titre' => $titre,
-                        'description' => $description,
-                        'date_limite' => $date_limite,
-                        'created_by' => $created_by,
-                        'type_evaluation' => $type_evaluation
-                    ]);
+            try {
+                $statement = $this->db->prepare($sql);
+                $statement->execute([
+                    'etudiant_id' => $etudiant_id,
+                    'nom' => $nom,
+                    'semestre' => $semestre,
+                    'type_evaluation' => $type_evaluation,
+                    'created_by' => $created_by
+                ]);
 
-                    return $this->db->lastInsertId() ?: null;
-                } catch (PDOException $error) {
-                    error_log("Erreur lors de l'ajout de l'evaluation :" . $error->getMessage());
-                    throw $error;
-                }
+                return $this->db->lastInsertId() ?: null;
+            } catch (PDOException $error) {
+                error_log("Erreur lors de l'ajout de l'évaluation :" . $error->getMessage());
+                throw $error;
+            }
         }
 
-        // Recuperer toutes les evaluations actives
+        // Récupérer toutes les évaluations actives
         public function getAll()
         {
-            $sql = "SELECT e.*, et.nom, et.prenom
+            $sql = "SELECT e.*, et.nom as etudiant_nom, et.prenom
                     FROM evaluations e
                     JOIN etudiants et ON e.etudiant_id = et.id
                     WHERE e.deleted_at IS NULL
-                    ORDER BY e.date_limite DESC";
+                    ORDER BY e.created_at DESC";
 
-            try{
+            try {
                 $statement = $this->db->prepare($sql);
                 $statement->execute();
                 return $statement->fetchAll(PDO::FETCH_ASSOC) ?: [];
-            }catch(PDOException $error){
-                error_log("Erreur lors de la recupertion des evaluations:". $error->getMessage());
+            } catch (PDOException $error) {
+                error_log("Erreur lors de la récupération des évaluations:" . $error->getMessage());
                 throw $error;
             }
-        } 
+        }
 
-        // Recuperer les evaluations d'un etudiant specifique
-        public  function getEvaluationsByEtudiant($etudiant_id)
+        // Récupérer les évaluations d'un étudiant spécifique
+        public function getEvaluationsByEtudiant($etudiant_id)
         {
-            $sql = "SELECT * FROM evaluations WHERE etudiant_id = :etudiant_id AND deleted_at IS NULL ORDER BY date_limite DESC";
+            $sql = "SELECT * FROM evaluations WHERE etudiant_id = :etudiant_id AND deleted_at IS NULL ORDER BY created_at DESC";
 
-            try{
+            try {
                 $statement = $this->db->prepare($sql);
                 $statement->bindParam(':etudiant_id', $etudiant_id, PDO::PARAM_INT);
                 $statement->execute();
                 return $statement->fetchAll(PDO::FETCH_ASSOC) ?: [];
-            }catch(PDOException $error){
-                error_log("Erreur lors de la recuperation des evaluations pour l'etudiant ID $etudiant_id: ".$error->getMessage());
-                throw $error; 
+            } catch (PDOException $error) {
+                error_log("Erreur lors de la récupération des évaluations pour l'étudiant ID $etudiant_id: " . $error->getMessage());
+                throw $error;
             }
         }
 
-        // Modifier une evaluation
-        public function update($id, $titre, $description, $date_limite, $updated_by, $type_evaluation): bool
+        // Modifier une évaluation
+        public function update($id, $nom, $semestre, $type_evaluation, $updated_by): bool
         {
             $sql = "UPDATE evaluations
-                    SET titre = :titre, description = :description, date_limite = :date_limite, 
-                        updated_at = NOW(), updated_by = :updated_by, type_evaluation = :type_evaluation
+                    SET nom = :nom, semestre = :semestre, 
+                        type_evaluation = :type_evaluation, updated_at = NOW(), updated_by = :updated_by
                     WHERE id = :id AND deleted_at IS NULL";
 
-            try{
+            try {
                 $statement = $this->db->prepare($sql);
                 $statement->execute([
                     'id' => $id,
-                    'titre' => $titre,
-                    'description' => $description,
-                    'date_limite' => $date_limite,
-                    'updated_by' => $updated_by,
-                    'type_evaluation' => $type_evaluation
+                    'nom' => $nom,
+                    'semestre' => $semestre,
+                    'type_evaluation' => $type_evaluation,
+                    'updated_by' => $updated_by
                 ]);
 
-                return $statement->rowCount() > 0; 
-            }   catch(PDOException $error){
-                error_log("Erreur lors de la modification de l'evaluation ID $id:".$error->getMessage());
+                return $statement->rowCount() > 0;
+            } catch (PDOException $error) {
+                error_log("Erreur lors de la modification de l'évaluation ID $id:" . $error->getMessage());
                 return false;
-            }     
+            }
         }
 
-        // Supprimer une evaluation
+        // Supprimer une évaluation
         public function delete($id, $deleted_by): bool
         {
             $sql = "UPDATE evaluations
@@ -103,28 +101,26 @@
                 ]);
 
                 return $statement->rowCount() > 0;
-            }   catch (PDOException $error){
-                error_log("Erreur lors de la suppression de l'evaluation ID $id: ".$error->getMessage());
+            } catch (PDOException $error) {
+                error_log("Erreur lors de la suppression de l'évaluation ID $id: " . $error->getMessage());
                 throw $error;
-            }     
+            }
         }
 
-        // Restaurer une evaluation supprimee
-        public function restore($id):bool
+        // Restaurer une évaluation supprimée
+        public function restore($id): bool
         {
             $sql = "UPDATE evaluations
                     SET deleted_at = NULL, deleted_by = NULL
                     WHERE id = :id AND deleted_at IS NOT NULL";
-            try{
+            try {
                 $statement = $this->db->prepare($sql);
                 $statement->execute(['id' => $id]);
-                return $statement->rowCount() > 0; 
-            }catch(PDOException $error){
-                error_log("Erreur lors de la restauration de l'evaluation ID $id :".$error->getMessage());
+                return $statement->rowCount() > 0;
+            } catch (PDOException $error) {
+                error_log("Erreur lors de la restauration de l'évaluation ID $id :" . $error->getMessage());
                 throw $error;
             }
-
         }
     }
-
 ?>

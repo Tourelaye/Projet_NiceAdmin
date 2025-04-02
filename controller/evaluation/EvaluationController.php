@@ -32,20 +32,29 @@ class EvaluationController
         if ($_SERVER['REQUEST_METHOD']  == 'POST') {
             // Récupération des informations du formulaire
             $etudiant_id = trim($_POST['etudiant_id'] ?? '');
-            $titre = trim($_POST['titre'] ?? '');
-            $description = trim($_POST['description'] ?? '');
+            $nom = trim($_POST['nom'] ?? ''); // Nouveau champ nom
+            $semestre = trim($_POST['semestre'] ?? ''); // Nouveau champ semestre
             $type_evaluation = trim($_POST['type_evaluation'] ?? '');
+            $description = trim($_POST['description'] ?? '');
             $date_limite = trim($_POST['date_limite'] ?? '');
             $created_by = $_SESSION['user_id'] ?? null;
     
             // Validation des données
-            if (empty($etudiant_id) || empty($titre) || empty($description) || empty($type_evaluation) || empty($date_limite)) {
+            if (empty($etudiant_id) || empty($nom) || empty($semestre) || empty($type_evaluation) || empty($description) || empty($date_limite)) {
                 $this->setErrorAndRedirect("Tous les champs sont requis", "Erreur d'ajout");
             }
     
             try {
                 // Ajout de l'évaluation en base de données
-                $lastInsertId = $this->evaluationRepository->addEvaluation($etudiant_id, $titre, $description, $type_evaluation, $date_limite, $created_by);
+                $lastInsertId = $this->evaluationRepository->addEvaluation(
+                    $etudiant_id, 
+                    $nom, // Nouveau champ nom
+                    $semestre, // Nouveau champ semestre
+                    $type_evaluation, 
+                    $description, 
+                    $date_limite, 
+                    $created_by
+                );
     
                 if ($lastInsertId) {
                     $this->setSuccessAndRedirect("Évaluation ajoutée avec succès", "Ajout réussi");
@@ -57,10 +66,9 @@ class EvaluationController
             }
         }
     }
-    
 
-
-    public function getAll(){
+    public function getAll()
+    {
         return $this->evaluationRepository->getAll();
     }
 }

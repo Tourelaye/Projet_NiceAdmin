@@ -1,33 +1,31 @@
 <?php
 require_once("DBRepository.php");
 
-class NoteRepository
+class NoteRepository extends DBRepository
 {
-    private $conn;
-
-    public function __construct()
+    // Ajouter une note en utilisant les colonnes : idEtudiant, note, idEvaluation
+    public function addNote($idEtudiant, $note, $idEvaluation): ?int
     {
-        $database = new Database();
-        $this->conn = $database->getConnection();
+        $sql = "INSERT INTO notes (idEtudiant, note, idEvaluation) VALUES (:idEtudiant, :note, :idEvaluation)";
+        $statement = $this->db->prepare($sql);
+        $statement->bindValue(':idEtudiant', $idEtudiant, PDO::PARAM_INT);
+        $statement->bindValue(':note', $note);
+        $statement->bindValue(':idEvaluation', $idEvaluation, PDO::PARAM_INT);
+        
+        if ($statement->execute()) {
+            return $this->db->lastInsertId();
+        }
+        return null;
     }
 
-    // Ajouter une note
-    public function addNote($etudiant_id, $matiere, $note, $coefficient, $created_by, $evaluation_id): ?int
-    {
-        $sql = "INSERT INTO notes (etudiant_id, matiere, note, created_by) VALUES (?, ?, ?, ?)";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bind_param("isdi", $etudiant_id, $matiere, $note, $created_by);
-        return $stmt->execute();
-    }
-
-    // Récupérer toutes les notes actives
-    public function getAll()
+    // Récupérer toutes les notes actives en joignant la table des étudiants
+    public function getAll(): array
     {
         $sql = "SELECT n.*, e.nom, e.prenom
                 FROM notes n
-                JOIN etudiants e ON n.etudiant_id = e.id";
-        $result = $this->conn->query($sql);
-        return $result->fetch_all(MYSQLI_ASSOC);
+                JOIN etudiants e ON n.idEtudiant = e.id";
+        $statement = $this->db->query($sql);
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 }
 ?>

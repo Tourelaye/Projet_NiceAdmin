@@ -39,40 +39,35 @@
             <thead class="table-dark">
               <tr>
                 <th width="1%">ID</th>
-                <th class ="tect-nowrap">Nom</th>
-                <th class ="tect-nowrap">Prénom</th>
-                <th class ="tect-nowrap">Email</th>
-                <!-- <th class ="tect-nowrap">Date de naissance</th>
-                <th class ="tect-nowrap">Date d'inscription</th> -->
-                <th class ="tect-nowrap">Adresse</th>
-                <th class ="tect-nowrap">Nationalite</th>
-                <th class ="tect-nowrap">Matricule</th>
-                <th class ="tect-nowrap">Sexe</th>
+                <th class ="text-nowrap">Nom</th>
+                <th class ="text-nowrap">Photo</th>
+                <th class ="text-nowrap">Email</th>
+                <th class ="text-nowrap">Password</th>
+                <th class ="text-nowrap">Adresse</th>
+                <th class ="text-nowrap">Matricule</th>
+                <th class ="text-nowrap">Téléphone</th>
+                <th class ="text-nowrap">État</th>
               </tr>
             </thead>
-            <tbody >
+            <tbody>
               <!-- Les étudiants seront affichés ici dynamiquement -->
                <?php if (!empty($etudiant)): ?>
                   <?php foreach ($etudiant as $etudiant): ?>
                     <tr>
                       <td><?= htmlspecialchars($etudiant['id']) ?></td>
                       <td><?= htmlspecialchars($etudiant['nom']) ?></td>
-                      <td><?= htmlspecialchars($etudiant['prenom']) ?></td>
+                      <td><img src="<?= htmlspecialchars($etudiant['photo']) ?>" alt="Photo" width="50"></td>
                       <td><?= htmlspecialchars($etudiant['email']) ?></td>
-                      <!-- <td><?= htmlspecialchars($etudiant['dateNaissance']) ?></td>
-                      <td><?= htmlspecialchars($etudiant['dateInscription']) ?></td> -->
+                      <td><?= htmlspecialchars($etudiant['password']) ?></td>
                       <td><?= htmlspecialchars($etudiant['adresse']) ?></td>
-                      <td><?= htmlspecialchars($etudiant['nationalite']) ?></td>
                       <td><?= htmlspecialchars($etudiant['matricule']) ?></td>  
-                      <td><?= htmlspecialchars($etudiant['sexe']) ?></td>
-                      <td>
+                      <td><?= htmlspecialchars($etudiant['telephone']) ?></td>
+                      <td><?= htmlspecialchars($etudiant['etat']) ?></td>
                     </tr>
                   <?php endforeach; ?>
                 <?php endif; ?>    
-
             </tbody>
           </table>
-
         </div>
       </div>
     </section>
@@ -86,87 +81,49 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
           </div>
           <div class="modal-body">
-            <form action="EtudiantController" method="POST">
+            <form action="EtudiantController" method="POST" enctype="multipart/form-data">
               <input type="hidden" id="studentId">
               
               <div class="mb-3">
                 <label for="nom" class="form-label">Nom</label>
                 <input type="text" class="form-control" id="nom" name="nom" required>
-                <p class="error-message"></p>
               </div>
-              
+
               <div class="mb-3">
-                <label for="prenom" class="form-label">Prénom</label>
-                <input type="text" class="form-control" id="prenom" name="prenom" required>
-                <p class="error-message"></p>
+                <label for="photo" class="form-label">Photo</label>
+                <input type="file" class="form-control" id="photo" name="photo" required>
               </div>
               
               <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
                 <input type="email" class="form-control" id="email" name="email" required>
-                <p class="error-message"></p>
               </div>
               
               <div class="mb-3">
-                <label for="date_naissance" class="form-label">Date de naissance</label>
-                <input type="date" class="form-control" id="date_naissance" name="date_naissance" required>
-                <p class="error-message"></p>
-              </div>
-              
-              <div class="mb-3">
-                <label for="date_inscription" class="form-label">Date d'inscription</label>
-                <input type="date" class="form-control" id="date_inscription" name="date_inscription" required>
-                <p class="error-message"></p>
+                <label for="password" class="form-label">Mot de passe</label>
+                <input type="password" class="form-control" id="password" name="password" required>
               </div>
               
               <div class="mb-3">
                 <label for="adresse" class="form-label">Adresse</label>
                 <input type="text" class="form-control" id="adresse" name="adresse" required>
-                <p class="error-message"></p>
               </div>
-              
-              <div class="mb-3">
-                <label for="nationalite" class="form-label">Nationalité</label>
-                <input type="text" class="form-control" id="nationalite" name="nationalite" list="nationalites">
-                <datalist id="nationalites">
-                  <option value="Sénégalaise"></option>
-                  <option value="Française"></option>
-                  <option value="Malienne"></option>
-                  <option value="Marocaine"></option>
-                  <option value="Ivoirienne"></option>
-                  <option value="Nigériane"></option>
-                  <option value="Algérienne"></option>
-                  <option value="Tunisienne"></option>
-                  <option value="Américaine"></option>
-                  <option value="Espagnole"></option>
-                  <option value="Chinoise"></option>
-                  <option value="Indienne"></option>
-                  <option value="Canadienne"></option>
-                  <option value="Allemande"></option>
-                  <option value="Brésilienne"></option>
-                  <option value="Portugaise"></option>
-                  <option value="Italienne"></option>
-                  <option value="Anglaise"></option>
-                  <option value="Sud-africaine"></option>
-                  <option value="Ghanéenne"></option>
-                  <option value="Congolaise"></option>
-                  <option value="Burkinabé"></option>
-                  <option value="Égyptienne"></option>
-                </datalist>
-              </div>
-
               
               <div class="mb-3">
                 <label for="matricule" class="form-label">Matricule</label>
                 <input type="text" class="form-control" id="matricule" name="matricule" required>
-                <p class="error-message"></p>
               </div>
               
               <div class="mb-3">
-                <label for="sexe" class="form-label">Sexe</label>
-                <select class="form-control" id="sexe" name="sexe" required>
-                  <option value="M">Masculin</option>
-                  <option value="F">Féminin</option>
+                <label for="telephone" class="form-label">Téléphone</label>
+                <input type="text" class="form-control" id="telephone" name="telephone" required>
+              </div>
+              
+              <div class="mb-3">
+                <label for="etat" class="form-label">État</label>
+                <select class="form-control" id="etat" name="etat" required>
+                  <option value="actif">Actif</option>
+                  <option value="inactif">Inactif</option>
                 </select>
               </div>
               
@@ -177,8 +134,6 @@
         </div>
       </div>
     </div>
-
-
   </main>
 
   <!-- ==================== Section Footer ==================== -->
@@ -186,8 +141,6 @@
 
   <!-- ==================== Section Base JS ==================== -->
   <?php require_once("../../../sections/admin/script.php")?>
-
-
 
 </body>
 </html>

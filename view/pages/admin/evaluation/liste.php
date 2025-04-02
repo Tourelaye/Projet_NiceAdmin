@@ -1,7 +1,7 @@
-<?php
-  require_once("../../../../model/EvaluationRepository.php");
-  $evaluationRepository = new EvaluationRepository();
-  $evaluation = $evaluationRepository->getAll();
+<?php 
+require_once("../../../../model/EvaluationRepository.php");
+$evaluationRepository = new EvaluationRepository();
+$evaluations = $evaluationRepository->getAll();
 ?>
 
 <!DOCTYPE html>
@@ -32,38 +32,32 @@
             Ajouter une évaluation
           </button>
 
-          <input type="text" id="searchEvaluation" class="form-control mb-3" placeholder="Rechercher une évaluation...">
-
           <table class="table table-bordered">
             <thead class="table-dark">
               <tr>
-                <th width="1%">ID</th>
-                <th class ="tect-nowrap">Étudiant</th>
-                <th class ="tect-nowrap">Titre</th>
-                <th class ="tect-nowrap">Description</th>
-                <th class ="tect-nowrap"> Type evaluation</th>
-                <th class ="tect-nowrap">Date limite</th>
+                <th>ID</th>
+                <th>Étudiant ID</th>
+                <th>Nom</th>
+                <th>Semestre</th>
+                <th>Type d'évaluation</th>
+                <th>Créé le</th>
+                <th>Créé par</th>
               </tr>
             </thead>
             <tbody>
-              <!-- Les évaluations seront affichées ici dynamiquement -->
-                <?php if (!empty($evaluation)): ?>
-                  <?php foreach ($evaluation as $evaluation): ?>
-                    <tr>
+              <?php if (!empty($evaluations)): ?>
+                <?php foreach ($evaluations as $evaluation): ?>
+                  <tr>
                     <td><?= htmlspecialchars($evaluation['id']) ?></td>
-                    <td><?= htmlspecialchars($evaluation['etudiant']) ?></td> 
-                    <td><?= htmlspecialchars($evaluation['titre']) ?></td>
-                    <td><?= htmlspecialchars($evaluation['description']) ?></td>
+                    <td><?= htmlspecialchars($evaluation['etudiant_id']) ?></td>
+                    <td><?= htmlspecialchars($evaluation['nom']) ?></td>
+                    <td><?= htmlspecialchars($evaluation['semestre']) ?></td>
                     <td><?= htmlspecialchars($evaluation['type_evaluation']) ?></td>
-                    <td><?= htmlspecialchars($evaluation['date_limite']) ?></td>
-                    </tr>
-                  <?php endforeach; ?>
-                <?php endif; ?>
-
-
-
-
-
+                    <td><?= htmlspecialchars($evaluation['created_at']) ?></td>
+                    <td><?= htmlspecialchars($evaluation['created_by']) ?></td>
+                  </tr>
+                <?php endforeach; ?>
+              <?php endif; ?>
             </tbody>
           </table>
         </div>
@@ -81,35 +75,25 @@
           <div class="modal-body">
             <form id="evaluationForm">
               <div class="mb-3">
-                <label for="etudiant_id" class="form-label">Étudiant</label>
-                <select class="form-control" id="etudiant_id" name="etudiant_id" required>
-                  <option value="">Selectionner un etudiant </option>
-                  <!-- Options des étudiants seront chargées ici -->
-                </select>
+                <label for="etudiant_id" class="form-label">ID Étudiant</label>
+                <input type="number" class="form-control" id="etudiant_id" required>
               </div>
               <div class="mb-3">
-                <label for="titre" class="form-label">Titre</label>
-                <input type="text" class="form-control" id="titre" required>
+                <label for="nom" class="form-label">Nom</label>
+                <input type="text" class="form-control" id="nom" required>
               </div>
               <div class="mb-3">
-                <label for="description" class="form-label">Description</label>
-                <textarea class="form-control" id="description" required></textarea>
+                <label for="semestre" class="form-label">Semestre</label>
+                <input type="text" class="form-control" id="semestre" required>
               </div>
-
-              <!-- Sélection de l'évaluation -->
               <div class="mb-3">
                 <label for="type_evaluation" class="form-label">Type d'évaluation</label>
                 <select class="form-control" id="type_evaluation" required>
-                  <option value="1">Devoir</option>
-                  <option value="2">Examen</option>
-                  <!-- Ajoute d'autres types si nécessaire -->
+                  <option value="Devoir">Devoir</option>
+                  <option value="Examen">Examen</option>
                 </select>
               </div>
-              <div class="mb-3">
-                <label for="date_limite" class="form-label">Date limite</label>
-                <input type="date" class="form-control" id="date_limite" required>
-              </div>
-              <button type="submit" name="frmAddEvaluation" value="1" class="btn btn-primary">Enregistrer</button>
+              <button type="submit" class="btn btn-primary">Enregistrer</button>
               <button type="reset" class="btn btn-danger">Annuler</button>
             </form>
           </div>
@@ -121,19 +105,5 @@
   <!-- ==================== Section Footer ==================== -->
   <?php require_once("../../../sections/admin/footer.php")?>  
 
-  <!-- ==================== Section Base JS ==================== -->
-  <?php require_once("../../../sections/admin/script.php")?>
-
-  <script>
-    document.getElementById('searchEvaluation').addEventListener('input', function() {
-      let searchValue = this.value.toLowerCase();
-      let rows = document.querySelectorAll("#evaluationTableBody tr");
-      rows.forEach(row => {
-        let titre = row.children[2].textContent.toLowerCase();
-        let description = row.children[3].textContent.toLowerCase();
-        row.style.display = titre.includes(searchValue) || description.includes(searchValue) ? "" : "none";
-      });
-    });
-  </script>
 </body>
 </html>

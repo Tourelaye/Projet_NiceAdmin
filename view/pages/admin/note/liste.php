@@ -33,10 +33,8 @@
               <tr>
                 <th>ID</th>
                 <th>Étudiant</th>
-                <th>Matière</th>
-                <th>Note Devoir</th>
-                <th>Note Examen</th>
-                <th>Actions</th>
+                <th>Évaluation</th>
+                <th>Note</th>
               </tr>
             </thead>
             <tbody id="notesTableBody">
@@ -68,21 +66,11 @@
                 </select>
               </div>
 
-              <!-- Sélection de la matière -->
-              <div class="mb-3">
-                <label for="matiere" class="form-label">Matière</label>
-                <select class="form-control" id="matiere" required>
-                  <!-- Options dynamiques -->
-                </select>
-              </div>
-
               <!-- Sélection de l'évaluation -->
               <div class="mb-3">
-                <label for="evaluation" class="form-label">Type d'évaluation</label>
+                <label for="evaluation" class="form-label">Évaluation</label>
                 <select class="form-control" id="evaluation" required>
-                  <option value="1">Devoir</option>
-                  <option value="2">Examen</option>
-                  <!-- Ajoute d'autres types si nécessaire -->
+                  <!-- Options dynamiques -->
                 </select>
               </div>
 
@@ -90,12 +78,6 @@
               <div class="mb-3">
                 <label for="note" class="form-label">Note</label>
                 <input type="number" class="form-control" id="note" min="0" max="20" step="0.01" required>
-              </div>
-
-              <!-- Saisie du coefficient -->
-              <div class="mb-3">
-                <label for="coefficient" class="form-label">Coefficient</label>
-                <input type="number" class="form-control" id="coefficient" min="1" max="10" step="0.1" required>
               </div>
 
               <!-- Champ caché pour "created_by" -->
@@ -116,25 +98,5 @@
   <!-- ==================== Section Base JS ==================== -->
   <?php require_once("../../../sections/admin/script.php")?>
 
-  <script>
-    document.getElementById('searchNote').addEventListener('input', function() {
-      let searchValue = this.value.toLowerCase();
-      let rows = document.querySelectorAll("#notesTableBody tr");
-      rows.forEach(row => {
-        let etudiant = row.children[1].textContent.toLowerCase();
-        row.style.display = etudiant.includes(searchValue) ? "" : "none";
-      });
-    });
-
-    function editNote(id) {
-      // Implémentation de la modification d'une note
-    }
-
-    function deleteNote(id) {
-      if (confirm("Voulez-vous vraiment supprimer cette note ?")) {
-        // Implémentation de la suppression d'une note
-      }
-    }
-  </script>
 </body>
 </html>

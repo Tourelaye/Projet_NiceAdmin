@@ -17,12 +17,10 @@ class EtudiantRepository extends DBRepository
         }
     }
 
-   
-
     // Récupérer un étudiant par ID
     public function getEtudiantById(int $id)
     {
-        $sql = "SELECT id, nom, prenom FROM etudiants WHERE id = :id";
+        $sql = "SELECT id, nom, photo, email, password, adresse, matricule, telephone, etat FROM etudiants WHERE id = :id";
         try {
             $statement = $this->db->prepare($sql);
             $statement->bindParam(':id', $id, PDO::PARAM_INT);
@@ -35,40 +33,39 @@ class EtudiantRepository extends DBRepository
     }
 
     // Ajouter un étudiant
-    public function addEtudiant($nom, $prenom, $email, $date_naissance, $date_inscription, $adresse, $nationalite, $matricule, $sexe, $created_by)
+    public function addEtudiant($nom, $photo, $email, $password, $adresse, $matricule, $telephone, $etat, $created_at, $created_by)
     {
-        $sql = "INSERT INTO etudiants (nom, prenom, email, date_naissance, date_inscription, adresse, nationalite, matricule, sexe, created_at, created_by) 
-                VALUES (:nom, :prenom, :email, :date_naissance, :date_inscription, :adresse, :nationalite, :matricule, :sexe, NOW(), :created_by)";
+        $sql = "INSERT INTO etudiants (nom, photo, email, password, adresse, matricule, telephone, etat, created_at, created_by) 
+                VALUES (:nom, :photo, :email, :password, :adresse, :matricule, :telephone, :etat, :created_at, :created_by)";
 
         try {
             $statement = $this->db->prepare($sql);
             $statement->execute([
                 'nom' => $nom,
-                'prenom' => $prenom,
+                'photo' => $photo,
                 'email' => $email,
-                'date_naissance' => $date_naissance,
-                'date_inscription' => $date_inscription,
+                'password' => password_hash($password, PASSWORD_BCRYPT),
                 'adresse' => $adresse,
-                'nationalite' => $nationalite,
                 'matricule' => $matricule,
-                'sexe' => $sexe,
+                'telephone' => $telephone,
+                'etat' => $etat,
+                'created_at' => $created_at,
                 'created_by' => $created_by    
             ]);
 
             return $this->db->lastInsertId() ?: null;
         } catch (PDOException $error) {
-            error_log("Erreur lors de l'ajout de l'étudiant $nom $prenom : " . $error->getMessage());
+            error_log("Erreur lors de l'ajout de l'étudiant $nom : " . $error->getMessage());
             throw $error;
         }
     }
 
     // Modifier un étudiant
-    public function edit($id, $nom, $prenom, $email, $date_naissance, $date_inscription, $adresse, $nationalite, $matricule, $sexe, $updated_by)
+    public function edit($id, $nom, $photo, $email, $password, $adresse, $matricule, $telephone, $etat, $updated_by)
     {
         $sql = "UPDATE etudiants 
-                SET nom = :nom, prenom = :prenom, email = :email, 
-                    date_naissance = :date_naissance, date_inscription = :date_inscription,
-                    adresse = :adresse, nationalite = :nationalite, sexe = :sexe, matricule = :matricule,
+                SET nom = :nom, photo = :photo, email = :email, password = :password, 
+                    adresse = :adresse, matricule = :matricule, telephone = :telephone, etat = :etat,
                     updated_at = NOW(), updated_by = :updated_by
                 WHERE id = :id AND deleted_at IS NULL";
 
@@ -76,21 +73,20 @@ class EtudiantRepository extends DBRepository
             $statement = $this->db->prepare($sql);
             $statement->execute([
                 'nom' => $nom,
-                'prenom' => $prenom,
+                'photo' => $photo,
                 'email' => $email,
-                'date_naissance' => $date_naissance,
-                'date_inscription' => $date_inscription,
+                'password' => password_hash($password, PASSWORD_BCRYPT),
                 'adresse' => $adresse,
-                'nationalite' => $nationalite, 
                 'matricule' => $matricule,
-                'sexe' => $sexe,
+                'telephone' => $telephone,
+                'etat' => $etat,
                 'updated_by' => $updated_by,
                 'id' => $id
             ]);
 
             return $statement->rowCount() > 0;
         } catch (PDOException $error) {
-            error_log("Erreur lors de la modification de l'étudiant $id ($nom $prenom) : " . $error->getMessage());
+            error_log("Erreur lors de la modification de l'étudiant $id ($nom) : " . $error->getMessage());
             return false;
         }
     }
