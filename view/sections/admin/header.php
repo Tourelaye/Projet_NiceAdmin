@@ -6,6 +6,13 @@
   <meta content="" name="description">
   <meta content="" name="keywords">
 
+  <!-- CSS Bootstrap -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- JS Bootstrap (modals inclus) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
   <!-- Favicons -->
   <link href="public/templates/templateAdmin/assets/img/favicon.png" rel="icon">
   <link href="public/templates/templateAdmin/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
