@@ -35,7 +35,7 @@ class EvaluationController
             $nom = trim($_POST['nom'] ?? ''); // Nouveau champ nom
             $semestre = trim($_POST['semestre'] ?? ''); // Nouveau champ semestre
             $type_evaluation = trim($_POST['type_evaluation'] ?? '');
-            $created_by = $_SESSION['user_id'] ?? null;
+            $created_by = $_SESSION['id'] ?? null;
     
             // Validation des données
             if (empty($etudiant_id) || empty($nom) || empty($semestre) || empty($type_evaluation) ) {
@@ -44,7 +44,7 @@ class EvaluationController
     
             try {
                 // Ajout de l'évaluation en base de données
-                $lastInsertId = $this->evaluationRepository->addEvaluation(
+                $lastInsertId = $this->evaluationRepository->add(
                     $etudiant_id, 
                     $nom, // Nouveau champ nom
                     $semestre, // Nouveau champ semestre

@@ -14,7 +14,7 @@ RewriteRule ^pages-deconnexion.html$ view/pages/admin/deconnexion/liste.php
 # ---------------- Routes controllers ----------------
 RewriteRule ^EtudiantController$ controller/etudiant/EtudiantMainController.php
 RewriteRule ^NoteController$ controller/note/NoteMainController.php
-RewriteRule ^EvaluationController$ controller/modifier/EvaluationMainController.php
+RewriteRule ^EvaluationController$ controller/evaluation/EvaluationMainController.php
 RewriteRule ^DeconnexionController$ controller/deconnexion/DeconnexionMainController.php
 
 # ---------------- Routes Models      ---------------- 
