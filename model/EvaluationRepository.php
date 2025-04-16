@@ -4,10 +4,10 @@
     class EvaluationRepository extends DBRepository
     {
         // Ajouter une évaluation
-        public function addEvaluation($etudiant_id, $nom, $semestre, $type_evaluation, $created_by): ?int
+        public function add($etudiant_id, $nom, $semestre, $type_evaluation, $created_by)
         {
-            $sql = "INSERT INTO evaluations (etudiant_id, nom, semestre, type_evaluation, created_by, created_at)
-                    VALUES (:etudiant_id, :nom, :semestre, :type_evaluation, :created_by, NOW())";
+            $sql = "INSERT INTO evaluations (etudiant_id, nom, semestre, type_evaluation, created_by)
+                    VALUES (:etudiant_id, :nom, :semestre, :type_evaluation, :created_by)";
 
             try {
                 $statement = $this->db->prepare($sql);

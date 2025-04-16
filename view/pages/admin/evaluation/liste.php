@@ -40,8 +40,6 @@
                 <th>Nom</th>
                 <th>Semestre</th>
                 <th>Type d'évaluation</th>
-                <th>Créé le</th>
-                <th>Créé par</th>
               </tr>
             </thead>
             <tbody>
@@ -53,8 +51,6 @@
                     <td><?= htmlspecialchars($evaluation['nom']) ?></td>
                     <td><?= htmlspecialchars($evaluation['semestre']) ?></td>
                     <td><?= htmlspecialchars($evaluation['type_evaluation']) ?></td>
-                    <td><?= htmlspecialchars($evaluation['created_at']) ?></td>
-                    <td><?= htmlspecialchars($evaluation['created_by']) ?></td>
                   </tr>
                 <?php endforeach; ?>
               <?php endif; ?>
@@ -73,29 +69,37 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
           </div>
           <div class="modal-body">
-            <form action="EvaluationController" method="post" enctype="multipart/form-data">
+            <form action="EvaluationController" method="POST" enctype="multipart/form-data">
             
   
               <div class="mb-3">
                 <label for="etudiant_id" class="form-label">ID Étudiant</label>
                 <input type="number" class="form-control" id="etudiant_id" name="etudiant_id" required>
               </div>
+
               <div class="mb-3">
                 <label for="nom" class="form-label">Nom</label>
                 <input type="text" class="form-control" id="nom" name="nom" required>
               </div>
+
+              <!-- Champ pour le semestre -->
               <div class="mb-3">
                 <label for="semestre" class="form-label">Semestre</label>
-                <input type="text" class="form-control" id="semestre" name="semestre" required>
+                <select class="form-control" id="semestre" name="semestre" required>
+                  <option value="">Sélectionnez un semestre</option>
+                  <option value="1">Semestre 1</option>
+                  <option value="2">Semestre 2</option>
+                </select>
               </div>
+              
               <div class="mb-3">
                 <label for="type_evaluation" class="form-label">Type d'évaluation</label>
-                <select class="form-control" id="type_evaluation" required>
+                <select class="form-control" id="type_evaluation" name="type_evaluation" required>
                   <option value="Devoir">Devoir</option>
                   <option value="Examen">Examen</option>
                 </select>
               </div>
-              <button type="submit" class="btn btn-primary">Enregistrer</button>
+              <button type="submit" name="frmAddEvaluation" class="btn btn-primary">Enregistrer</button>
               <button type="reset" class="btn btn-danger">Annuler</button>
             </form>
           </div>
