@@ -42,7 +42,7 @@
                 <th class ="text-nowrap">Nom</th>
                 <th class ="text-nowrap">Photo</th>
                 <th class ="text-nowrap">Email</th>
-                <th class ="text-nowrap">Password</th>
+                <!-- <th class ="text-nowrap">Password</th> -->
                 <th class ="text-nowrap">Adresse</th>
                 <th class ="text-nowrap">Matricule</th>
                 <th class ="text-nowrap">Téléphone</th>
@@ -58,7 +58,7 @@
                       <td><?= htmlspecialchars($etudiant['nom']) ?></td>
                       <td><img src="<?= htmlspecialchars($etudiant['photo']) ?>" alt="Photo" width="50"></td>
                       <td><?= htmlspecialchars($etudiant['email']) ?></td>
-                      <td><?= htmlspecialchars($etudiant['password']) ?></td>
+                      <!-- <td><?= htmlspecialchars($etudiant['password']) ?></td> -->
                       <td><?= htmlspecialchars($etudiant['adresse']) ?></td>
                       <td><?= htmlspecialchars($etudiant['matricule']) ?></td>  
                       <td><?= htmlspecialchars($etudiant['telephone']) ?></td>
