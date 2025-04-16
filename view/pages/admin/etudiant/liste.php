@@ -40,6 +40,7 @@
               <tr>
                 <th width="1%">ID</th>
                 <th class ="text-nowrap">Nom</th>
+                <th class ="text-nowrap">Prénom</th>
                 <th class ="text-nowrap">Photo</th>
                 <th class ="text-nowrap">Email</th>
                 <!-- <th class ="text-nowrap">Password</th> -->
@@ -56,6 +57,7 @@
                     <tr>
                       <td><?= htmlspecialchars($etudiant['id']) ?></td>
                       <td><?= htmlspecialchars($etudiant['nom']) ?></td>
+                      <td><?= htmlspecialchars($etudiant['prenom']) ?></td>
                       <td><img src="<?= htmlspecialchars($etudiant['photo']) ?>" alt="Photo" width="50"></td>
                       <td><?= htmlspecialchars($etudiant['email']) ?></td>
                       <!-- <td><?= htmlspecialchars($etudiant['password']) ?></td> -->
@@ -87,6 +89,11 @@
               <div class="mb-3">
                 <label for="nom" class="form-label">Nom</label>
                 <input type="text" class="form-control" id="nom" name="nom" required>
+              </div>
+
+              <div class="mb-3">
+                <label for="prenom" class="form-label">Prenom</label>
+                <input type="text" class="form-control" id="prenom" name="prenom" required>
               </div>
 
               <div class="mb-3">

@@ -32,6 +32,7 @@ class EtudiantController
         if ($_SERVER['REQUEST_METHOD']  == 'POST') {
             // Récupération des informations
             $nom = trim($_POST['nom'] ?? '');
+            $prenom = trim($_POST['prenom'] ?? '');
             $photo = trim($_POST['photo'] ?? '');
             $email = trim($_POST['email'] ?? '');
             $password = trim($_POST['password'] ?? '');
@@ -43,12 +44,12 @@ class EtudiantController
             $created_by = $_SESSION['user_id'] ?? null;
 
             // Validation des données
-            if (empty($nom) || empty($email) || empty($password) || empty($adresse) || empty($matricule) || empty($telephone)) {
+            if (empty($nom) ||empty($prenom) || empty($email) || empty($password) || empty($adresse) || empty($matricule) || empty($telephone)) {
                 $this->setErrorAndRedirect("Tous les champs obligatoires sont requis", "Erreur d'ajout");
             }
 
             try {
-                $lastInsertId = $this->etudiantRepository->addEtudiant($nom, $photo, $email, $password, $adresse, $matricule, $telephone, $etat, $created_at, $created_by);
+                $lastInsertId = $this->etudiantRepository->addEtudiant($nom, $prenom, $photo, $email, $password, $adresse, $matricule, $telephone, $etat, $created_at, $created_by);
 
                 if ($lastInsertId) {
                     $this->setSuccessAndRedirect("Étudiant ajouté avec succès", "Ajout réussi");

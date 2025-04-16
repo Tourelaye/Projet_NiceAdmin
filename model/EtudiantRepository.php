@@ -20,7 +20,7 @@ class EtudiantRepository extends DBRepository
     // Récupérer un étudiant par ID
     public function getEtudiantById(int $id)
     {
-        $sql = "SELECT id, nom, photo, email, password, adresse, matricule, telephone, etat FROM etudiants WHERE id = :id";
+        $sql = "SELECT id, nom, prenom, photo, email, password, adresse, matricule, telephone, etat FROM etudiants WHERE id = :id";
         try {
             $statement = $this->db->prepare($sql);
             $statement->bindParam(':id', $id, PDO::PARAM_INT);
@@ -33,15 +33,16 @@ class EtudiantRepository extends DBRepository
     }
 
     // Ajouter un étudiant
-    public function addEtudiant($nom, $photo, $email, $password, $adresse, $matricule, $telephone, $etat, $created_at, $created_by)
+    public function addEtudiant($nom,$prenom, $photo, $email, $password, $adresse, $matricule, $telephone, $etat, $created_at, $created_by)
     {
-        $sql = "INSERT INTO etudiants (nom, photo, email, password, adresse, matricule, telephone, etat, created_at, created_by) 
-                VALUES (:nom, :photo, :email, :password, :adresse, :matricule, :telephone, :etat, :created_at, :created_by)";
+        $sql = "INSERT INTO etudiants (nom,prenom, photo, email, password, adresse, matricule, telephone, etat, created_at, created_by) 
+                VALUES (:nom,:prenom, :photo, :email, :password, :adresse, :matricule, :telephone, :etat, :created_at, :created_by)";
 
         try {
             $statement = $this->db->prepare($sql);
             $statement->execute([
                 'nom' => $nom,
+                'prenom' => $prenom,
                 'photo' => $photo,
                 'email' => $email,
                 'password' => password_hash($password, PASSWORD_BCRYPT),

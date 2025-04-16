@@ -1,7 +1,7 @@
 <?php 
-require_once("../../../../model/EvaluationRepository.php");
-$evaluationRepository = new EvaluationRepository();
-$evaluations = $evaluationRepository->getAll();
+  require_once("../../../../model/EvaluationRepository.php");
+  $evaluationRepository = new EvaluationRepository();
+  $evaluations = $evaluationRepository->getAll();
 ?>
 
 <!DOCTYPE html>
@@ -73,18 +73,20 @@ $evaluations = $evaluationRepository->getAll();
             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
           </div>
           <div class="modal-body">
-            <form id="evaluationForm">
+            <form action="EvaluationController" method="post" enctype="multipart/form-data">
+            
+  
               <div class="mb-3">
                 <label for="etudiant_id" class="form-label">ID Étudiant</label>
-                <input type="number" class="form-control" id="etudiant_id" required>
+                <input type="number" class="form-control" id="etudiant_id" name="etudiant_id" required>
               </div>
               <div class="mb-3">
                 <label for="nom" class="form-label">Nom</label>
-                <input type="text" class="form-control" id="nom" required>
+                <input type="text" class="form-control" id="nom" name="nom" required>
               </div>
               <div class="mb-3">
                 <label for="semestre" class="form-label">Semestre</label>
-                <input type="text" class="form-control" id="semestre" required>
+                <input type="text" class="form-control" id="semestre" name="semestre" required>
               </div>
               <div class="mb-3">
                 <label for="type_evaluation" class="form-label">Type d'évaluation</label>

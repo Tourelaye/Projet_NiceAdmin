@@ -35,12 +35,10 @@ class EvaluationController
             $nom = trim($_POST['nom'] ?? ''); // Nouveau champ nom
             $semestre = trim($_POST['semestre'] ?? ''); // Nouveau champ semestre
             $type_evaluation = trim($_POST['type_evaluation'] ?? '');
-            $description = trim($_POST['description'] ?? '');
-            $date_limite = trim($_POST['date_limite'] ?? '');
             $created_by = $_SESSION['user_id'] ?? null;
     
             // Validation des données
-            if (empty($etudiant_id) || empty($nom) || empty($semestre) || empty($type_evaluation) || empty($description) || empty($date_limite)) {
+            if (empty($etudiant_id) || empty($nom) || empty($semestre) || empty($type_evaluation) ) {
                 $this->setErrorAndRedirect("Tous les champs sont requis", "Erreur d'ajout");
             }
     
@@ -51,8 +49,6 @@ class EvaluationController
                     $nom, // Nouveau champ nom
                     $semestre, // Nouveau champ semestre
                     $type_evaluation, 
-                    $description, 
-                    $date_limite, 
                     $created_by
                 );
     
