@@ -106,7 +106,6 @@
               <div class="mb-3">
               <label for="evaluation_nom" class="form-label">Nom de l'évaluation</label>
               <select class="form-control" id="evaluation_nom" name="evaluation_nom" required>
-                <option value="">Sélectionnez une évaluation</option>
                 <option value="1">Probabilité-Statistique</option>
                 <option value="2">Recherche Opérationnelle</option>
                 <option value="3">Algorithme et programmation</option>
