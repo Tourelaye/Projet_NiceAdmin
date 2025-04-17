@@ -93,7 +93,7 @@ class EtudiantRepository extends DBRepository
     }
 
     // Supprimer un étudiant (marquage logique)
-    public function delete(int $id, int $deleted_by)
+    public function deleteEtudiant(int $id, int $deleted_by)
     {
         $sql = "UPDATE etudiants 
                 SET deleted_at = NOW(), deleted_by = :deleted_by

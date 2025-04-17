@@ -11,7 +11,6 @@ class EtudiantController
         $this->etudiantRepository = new EtudiantRepository();
     }
 
-    // Permet de retourner un message d'erreur
     private function setErrorAndRedirect($message, $title, $redirectUrl = 'admin.php')
     {
         $_SESSION["error"] = $message;
@@ -19,7 +18,6 @@ class EtudiantController
         exit;
     }
 
-    // Permet de retourner un message de succès
     private function setSuccessAndRedirect($message, $title, $redirectUrl = 'admin.php')
     {
         $_SESSION["success"] = $message;
@@ -29,11 +27,9 @@ class EtudiantController
 
     public function addEtudiant()
     {
-        if ($_SERVER['REQUEST_METHOD']  == 'POST') {
-            // Récupération des informations
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $nom = trim($_POST['nom'] ?? '');
             $prenom = trim($_POST['prenom'] ?? '');
-            $photo = trim($_POST['photo'] ?? '');
             $email = trim($_POST['email'] ?? '');
             $password = trim($_POST['password'] ?? '');
             $adresse = trim($_POST['adresse'] ?? '');
@@ -42,14 +38,27 @@ class EtudiantController
             $etat = trim($_POST['etat'] ?? '');
             $created_at = date("Y-m-d H:i:s");
             $created_by = $_SESSION['user_id'] ?? null;
+            $deleted_by = $_SESSION['user_id'] ?? null;
 
-            // Validation des données
-            if (empty($nom) ||empty($prenom) || empty($email) || empty($password) || empty($adresse) || empty($matricule) || empty($telephone)) {
+            // Gérer la photo (upload)
+            $photoPath = "";
+            if (isset($_FILES['photo']) && $_FILES['photo']['error'] === UPLOAD_ERR_OK) {
+                $tmpName = $_FILES['photo']['tmp_name'];
+                $name = basename($_FILES['photo']['name']);
+                $uploadDir = '../../uploads/';
+                if (!is_dir($uploadDir)) {
+                    mkdir($uploadDir, 0755, true);
+                }
+                $photoPath = $uploadDir . uniqid() . "_" . $name;
+                move_uploaded_file($tmpName, $photoPath);
+            }
+
+            if (empty($nom) || empty($prenom) || empty($email) || empty($password) || empty($adresse) || empty($matricule) || empty($telephone)) {
                 $this->setErrorAndRedirect("Tous les champs obligatoires sont requis", "Erreur d'ajout");
             }
 
             try {
-                $lastInsertId = $this->etudiantRepository->addEtudiant($nom, $prenom, $photo, $email, $password, $adresse, $matricule, $telephone, $etat, $created_at, $created_by);
+                $lastInsertId = $this->etudiantRepository->addEtudiant($nom, $prenom, $photoPath, $email, $password, $adresse, $matricule, $telephone, $etat, $created_at, $created_by);
 
                 if ($lastInsertId) {
                     $this->setSuccessAndRedirect("Étudiant ajouté avec succès", "Ajout réussi");
@@ -62,7 +71,23 @@ class EtudiantController
         }
     }
 
-    public function getAll(){
+    public function deleteEtudiant($id)
+    {
+        if (!$id) return false;
+    
+        $deleted_by = $_SESSION['user_id'] ?? null;
+    
+        if (!$deleted_by) {
+            $this->setErrorAndRedirect("Utilisateur non connecté", "Erreur suppression");
+            return false;
+        }
+    
+        return $this->etudiantRepository->deleteEtudiant($id, $deleted_by);
+    }
+    
+
+    public function getAll()
+    {
         return $this->etudiantRepository->getAll();
     }
 
@@ -83,13 +108,28 @@ class EtudiantController
     }
 }
 
-// Gestion des requêtes GET pour AJAX
-if (isset($_GET['action'])) {
-    $controller = new EtudiantController();
-    if ($_GET['action'] === 'list') {
-        echo json_encode($controller->getAll());
+// -----------------------------
+// GESTION DES REQUÊTES HTTP
+// -----------------------------
+$controller = new EtudiantController();
+
+// Traitement suppression
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['frmDeleteEtudiant'])) {
+    $id = $_POST['id'] ?? null;
+    if ($controller->deleteEtudiant($id)) {
+        $_SESSION['success'] = "Étudiant supprimé avec succès.";
+        header("Location: admin.php");
+        exit;
+    } else {
+        $_SESSION['error'] = "Échec de la suppression de l'étudiant.";
+        header("Location: admin.php");
+        exit;
     }
+}
+
+// Pour AJAX (recherche/listing/etc.)
+if (isset($_GET['action']) && $_GET['action'] === 'list') {
+    echo json_encode($controller->getAll());
 } elseif (isset($_GET['id'])) {
-    $controller = new EtudiantController();
     $controller->getEtudiantById($_GET['id']);
 }

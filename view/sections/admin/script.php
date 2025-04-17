@@ -14,3 +14,4 @@
 <script src="public/js/global/Validator.js"></script>
 <script src="public/js/etudiant/addFormValidator.js"></script>
 <script src="public/js/evaluation.js"></script>
+<script src="public/js/etudiant/modifyModal.js"></script>

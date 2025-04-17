@@ -48,6 +48,7 @@
                 <th class ="text-nowrap">Matricule</th>
                 <th class ="text-nowrap">Téléphone</th>
                 <th class ="text-nowrap">État</th>
+                <th calss ="text-nowrap">Bouton</th>
               </tr>
             </thead>
             <tbody>
@@ -65,6 +66,31 @@
                       <td><?= htmlspecialchars($etudiant['matricule']) ?></td>  
                       <td><?= htmlspecialchars($etudiant['telephone']) ?></td>
                       <td><?= htmlspecialchars($etudiant['etat']) ?></td>
+
+                      <!-- colonne Ations -->
+                       <td class="text-nowrap">
+                        <!-- Bouton Modifier -->
+                        <button 
+                          class="btn btn-sm btn-success" 
+                          data-bs-toggle="modal" 
+                          data-bs-target="#ModifyStudentModal"
+                          onclick='fillModifyModal(<?= json_encode($etudiant) ?>)'
+                        >
+                        <i class="bi bi-pencil-square"></i>
+                        </button>
+                        <!-- Formulaire Supprimer -->
+                          <form action="EtudiantController" method="POST" style="display:inline;">
+                            <input type="hidden" name="frmDeleteEtudiant" value="<?= $etudiant['id'] ?>">
+                            <button 
+                              type="submit" 
+                              name="frmDeleteEtudiant" 
+                              class="btn btn-sm btn-danger"
+                              onclick="return confirm('Voulez-vous vraiment supprimer cet étudiant ?')"
+                            >
+                              <i class="bi bi-trash"></i>
+                            </button>
+                          </form>
+                        </td>
                     </tr>
                   <?php endforeach; ?>
                 <?php endif; ?>    
