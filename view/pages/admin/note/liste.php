@@ -104,16 +104,21 @@
 
               <!-- Sélection de l'évaluation -->
               <div class="mb-3">
-                <label for="evaluation_id" class="form-label">Évaluation</label>
-                <select class="form-control" id="evaluation_id" name="evaluation_id" required>
-                  <?php foreach ($evaluations as $evaluation): ?>
-                    <option value="<?= $evaluation['id'] ?>">
-                      <?= $evaluation['nom'] ?>
-                    </option>
-                  <?php endforeach; ?>  
-                  <!-- Options dynamiques -->
-                </select>
-              </div>
+              <label for="evaluation_nom" class="form-label">Nom de l'évaluation</label>
+              <select class="form-control" id="evaluation_nom" name="evaluation_nom" required>
+                <option value="">Sélectionnez une évaluation</option>
+                <option value="1">Probabilité-Statistique</option>
+                <option value="2">Recherche Opérationnelle</option>
+                <option value="3">Algorithme et programmation</option>
+                <option value="4">PHP</option>
+                <option value="5">Bases de données</option>
+                <option value="6">Merise</option>
+                <option value="7">Python</option>
+                <option value="8">JavaScript</option>
+                <option value="9">Linux</option>
+                <option value="10">CyberSécurité</option>
+              </select>
+            </div>
 
               <!-- Saisie de la note -->
               <div class="mb-3">
