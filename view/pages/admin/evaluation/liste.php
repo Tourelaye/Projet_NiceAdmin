@@ -36,8 +36,8 @@
             <thead class="table-dark">
               <tr>
                 <th>ID</th>
-                <th>Étudiant ID</th>
-                <th>Nom</th>
+                <th>Nom de l'etudiant</th>
+                <th>Nom de l'evaluation</th>
                 <th>Semestre</th>
                 <th>Type d'évaluation</th>
               </tr>
@@ -47,7 +47,7 @@
                 <?php foreach ($evaluations as $evaluation): ?>
                   <tr>
                     <td><?= htmlspecialchars($evaluation['id']) ?></td>
-                    <td><?= htmlspecialchars($evaluation['etudiant_id']) ?></td>
+                    <td><?= htmlspecialchars($evaluation['etudiant_nom']) . ' ' . htmlspecialchars($evaluation['prenom'])?></td>
                     <td><?= htmlspecialchars($evaluation['nom']) ?></td>
                     <td><?= htmlspecialchars($evaluation['semestre']) ?></td>
                     <td><?= htmlspecialchars($evaluation['type_evaluation']) ?></td>

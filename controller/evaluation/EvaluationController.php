@@ -63,6 +63,12 @@ class EvaluationController
         }
     }
 
+    public function getAllEvaluations()
+    {
+        $repo = new EvaluationRepository();
+        return $repo->getAll();
+    }
+
     public function getAll()
     {
         return $this->evaluationRepository->getAll();
