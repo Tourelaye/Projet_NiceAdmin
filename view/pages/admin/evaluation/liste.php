@@ -90,8 +90,8 @@
 
             <!-- Sélection de l'évaluation -->
             <div class="mb-3">
-              <label for="evaluation_nom" class="form-label">Nom de l'évaluation</label>
-              <select class="form-control" id="evaluation_id" name="evaluation_id" required>
+              <label for="nom" class="form-label">Nom de l'évaluation</label>
+              <select class="form-control" id="nom" name="nom" required>
                 <option value="1">Probabilité-Statistique</option>
                 <option value="2">Recherche Opérationnelle</option>
                 <option value="3">Algorithme et programmation</option>

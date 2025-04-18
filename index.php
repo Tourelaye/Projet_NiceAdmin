@@ -37,6 +37,7 @@
   <!-- ================================== Section JS Files ================================== -->
   <?php require_once("view/sections/vitrine/script.php")?>
 
+
 </body>
 
 </html>

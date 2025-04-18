@@ -29,7 +29,7 @@ class NoteController
 
     public function addNote()
     {
-        if ($_SERVER['REQUEST_METHOD']  == 'POST') {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Récupération des informations du formulaire
             $etudiant_id = trim($_POST['etudiant_id'] ?? '');
             $note = trim($_POST['note'] ?? '');
@@ -42,6 +42,13 @@ class NoteController
             }
     
             try {
+                // Vérification si l'évaluation existe dans la table `evaluations`
+                $evaluationExists = $this->noteRepository->checkEvaluationExists($evaluation_id);
+    
+                if (!$evaluationExists) {
+                    $this->setErrorAndRedirect("L'évaluation spécifiée n'existe pas", "Erreur d'ajout");
+                }
+    
                 // Ajout de la note directement
                 $lastInsertId = $this->noteRepository->addNote($etudiant_id, $note, $evaluation_id);
     
@@ -56,6 +63,7 @@ class NoteController
             }
         }
     }
+    
     
 
     

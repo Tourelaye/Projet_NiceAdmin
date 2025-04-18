@@ -58,5 +58,18 @@ class NoteRepository extends DBRepository
             throw $error;
         }
     }
+
+    public function checkEvaluationExists($evaluation_id)
+    {
+        // Requête pour vérifier si l'évaluation existe
+        $query = "SELECT COUNT(*) FROM evaluations WHERE id = :evaluation_id";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':evaluation_id', $evaluation_id, PDO::PARAM_INT);
+        $stmt->execute();
+        
+        // Si le nombre retourné est supérieur à 0, l'évaluation existe
+        return $stmt->fetchColumn() > 0;
+    }
+
 }
 ?>

@@ -46,20 +46,18 @@
         }
 
         // Récupérer les évaluations d'un étudiant spécifique
-        public function getEvaluationsByEtudiant($etudiant_id)
+        public function getEvaluationById($evaluation_id)
         {
-            $sql = "SELECT * FROM evaluations WHERE etudiant_id = :etudiant_id AND deleted_at IS NULL ORDER BY created_at DESC";
-
-            try {
-                $statement = $this->db->prepare($sql);
-                $statement->bindParam(':etudiant_id', $etudiant_id, PDO::PARAM_INT);
-                $statement->execute();
-                return $statement->fetchAll(PDO::FETCH_ASSOC) ?: [];
-            } catch (PDOException $error) {
-                error_log("Erreur lors de la récupération des évaluations pour l'étudiant ID $etudiant_id: " . $error->getMessage());
-                throw $error;
-            }
+            // Connexion à la base de données (assurez-vous d’utiliser une méthode de connexion appropriée)
+            $query = "SELECT id FROM evaluations WHERE id = :evaluation_id";
+            $stmt = $this->db->prepare($query);
+            $stmt->bindParam(':evaluation_id', $evaluation_id, PDO::PARAM_INT);
+            $stmt->execute();
+        
+            // Vérifie si l'évaluation existe
+            return $stmt->fetch(PDO::FETCH_ASSOC); // Retourne l'évaluation si elle existe, sinon false
         }
+        
 
         // Modifier une évaluation
         public function update($id, $nom, $semestre, $type_evaluation, $updated_by): bool

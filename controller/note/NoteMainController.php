@@ -6,4 +6,5 @@ $noteController = new NoteController();
 if (isset($_POST["frmAddNote"])) {
     $noteController->addNote();
 }
+
 ?>

@@ -22,6 +22,7 @@
           <!--========================= Section Footer =========================-->
           <?php require_once("view/sections/login/footer.php");?>
 
+
         </div>
       </div>
     </div>

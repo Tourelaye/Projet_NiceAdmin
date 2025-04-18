@@ -73,17 +73,28 @@ class EtudiantController
 
     public function deleteEtudiant($id)
     {
-        if (!$id) return false;
-    
-        $deleted_by = $_SESSION['user_id'] ?? null;
-    
-        if (!$deleted_by) {
-            $this->setErrorAndRedirect("Utilisateur non connecté", "Erreur suppression");
-            return false;
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $id = trim($_POST['id'] ?? '');
+            
+            if (empty($id)) {
+                $this->setErrorAndRedirect("ID requis pour supprimer", "Erreur de suppression");
+            }
+
+            try {
+                $result = $this->etudiantRepository->desactivate($id);
+                
+                if ($result) {
+                    $this->setSuccessAndRedirect("Étudiant supprimé avec succès", "Suppression réussie");
+                } else {
+                    $this->setErrorAndRedirect("Erreur lors de la suppression", "Erreur de suppression");
+                }
+            } catch (Exception $e) {
+                $this->setErrorAndRedirect("Erreur interne : " . $e->getMessage(), "Erreur de suppression");
+            }
         }
-    
-        return $this->etudiantRepository->deleteEtudiant($id, $deleted_by);
     }
+    
+    
     
 
     public function getAll()

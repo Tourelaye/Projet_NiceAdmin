@@ -96,22 +96,23 @@ class EtudiantRepository extends DBRepository
     public function deleteEtudiant(int $id, int $deleted_by)
     {
         $sql = "UPDATE etudiants 
-                SET deleted_at = NOW(), deleted_by = :deleted_by
-                WHERE id = :id AND deleted_at IS NULL";
-
+                SET etat = 0, deleted_by = :deleted_by
+                WHERE id = :id AND etat = 1";
+    
         try {
             $statement = $this->db->prepare($sql);
             $statement->execute([
                 'deleted_by' => $deleted_by,
                 'id' => $id
             ]);
-
+    
             return $statement->rowCount() > 0;
         } catch (PDOException $error) {
-            error_log("Erreur lors de la suppression de l'étudiant ID $id : " . $error->getMessage());
-            throw $error;
+            error_log("Erreur lors de la désactivation de l'étudiant ID $id : " . $error->getMessage());
+            return false;
         }
     }
+    
 
     // Restaurer un étudiant supprimé
     public function restore(int $id)
@@ -126,6 +127,22 @@ class EtudiantRepository extends DBRepository
             return $statement->rowCount() > 0;
         } catch (PDOException $error) {
             error_log("Erreur lors de la restauration de l'étudiant ID $id : " . $error->getMessage());
+            throw $error;
+        }
+    }
+            //Desactivate un étudiant
+    public function desactivate($id)
+    {
+        $sql = "UPDATE etudiant SET etat = 0 WHERE id = :id";
+                
+                
+        try {
+            $statement = $this->db->prepare($sql);
+            $statement->execute(['id' => $id]);
+            $rowAffected = $statement->rowCount();
+            return $rowAffected > 0;
+        } catch (PDOException $error) {
+            error_log("Erreur lors de la désactivation de l'etudiant d'id $id " . $error->getMessage());
             throw $error;
         }
     }

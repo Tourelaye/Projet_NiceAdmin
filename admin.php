@@ -21,6 +21,7 @@
   <!-- ==================== Section Base JS ==================== -->
   <?php require_once("view/sections/admin/script.php")?>
 
+
 </body>
 
 </html>

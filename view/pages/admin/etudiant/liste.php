@@ -70,26 +70,13 @@
                       <!-- colonne Ations -->
                        <td class="text-nowrap">
                         <!-- Bouton Modifier -->
-                        <button 
-                          class="btn btn-sm btn-success" 
-                          data-bs-toggle="modal" 
-                          data-bs-target="#ModifyStudentModal"
-                          onclick='fillModifyModal(<?= json_encode($etudiant) ?>)'
-                        >
-                        <i class="bi bi-pencil-square"></i>
-                        </button>
                         <!-- Formulaire Supprimer -->
-                          <form action="EtudiantController" method="POST" style="display:inline;">
-                            <input type="hidden" name="frmDeleteEtudiant" value="<?= $etudiant['id'] ?>">
-                            <button 
-                              type="submit" 
-                              name="frmDeleteEtudiant" 
-                              class="btn btn-sm btn-danger"
-                              onclick="return confirm('Voulez-vous vraiment supprimer cet étudiant ?')"
-                            >
-                              <i class="bi bi-trash"></i>
-                            </button>
-                          </form>
+                        <form method="POST" action="EtudiantController" onsubmit="return confirm('Voulez-vous vraiment supprimer cet étudiant ?');">
+                            <input type="hidden" name="etudiant_id" value="<?= $etudiant['id'] ?>">
+                            <button type="submit" name="deleteEtudiant" class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></button>
+                        </form>
+
+
                         </td>
                     </tr>
                   <?php endforeach; ?>
